@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
 
 def index(request):
     return render(request, 'index.html')
@@ -104,6 +106,18 @@ def job(request, jobid):
     return JsonResponse(context_dict)
 
 
+# def user_login(reuest):
+#
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#
+#         user = authenticate(username=userame, password=password)
+#
+#         if user:
+#             if user.is.active:
+#                 login(request, login)
+#
 
     
 
