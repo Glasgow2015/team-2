@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
-from models import Job
+from adminapi.models import Job
 
 
 def index(request):
@@ -132,4 +132,6 @@ def job_accept(request, jobid):
 
     return HttpResponse(status=200)
 
+def job_reject(request, jobid):
+    pass
 
