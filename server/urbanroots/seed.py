@@ -2,7 +2,7 @@ os.environ['DJANGO_SETTINGS_MODULE'] = 'urbanroots.settings'
 import django
 django.setup()
 
-from adminapi.models import Skill, Area, UserVolunteer, SkillsList
+from adminapi.models import Skill, Area, UserVolunteer, SkillsList, AreasList
 from django.contrib.auth.models import User
 
 skills = [
@@ -58,5 +58,11 @@ for volunteer in volunteers:
 
     #for skill_list in SkillsList.objects.all():
         #print(skill_list.volunteer.user.first_name, skill_list.skill.name)
+
+    area0 = Area.objects.get(name=areas[0])
+    area_list0 = AreasList.objects.get_or_create(volunteer=v[0],
+                                                  area=area0)
+    #for area_list in AreasList.objects.all():
+        #print(area_list.volunteer.user.first_name, area_list.area.name)
     
                                         
