@@ -106,9 +106,6 @@ def job(request, jobid):
     context_dict['report_longitude'] = report.longitude
     context_dict['report_description'] = report.description
     
-<<<<<<< HEAD
-    return JsonResponse(context_dict)    
-=======
     return JsonResponse(context_dict)
 
 
@@ -124,10 +121,7 @@ def job(request, jobid):
 #             if user.is.active:
 #                 login(request, login)
 #
-
     
->>>>>>> 950380786d53031410b167454c8df88e7e60afa0
-
 def job_accept(request, jobid):
     # mark job as accepted
     try:
