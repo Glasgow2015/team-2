@@ -11,7 +11,7 @@ urlpatterns = patterns('',
                        url(r'^volunteer/(?P<userid>[\w\-]+)/assign/(?P<jobid>[\w\-]+)$', views.volunteer_assign),
                        url(r'^volunteer/(?P<userid>[\w\-]+)$', views.volunteer),
 
-                       url(r'^report/$', views.reports),
+                       url(r'^reports/$', views.reports),
                        url(r'^report/submit$', views.report_submit),
                        url(r'^report/(?P<reportid>[\w\-]+)/accept$', views.report_accept),
                        url(r'^report/(?P<reportid>[\w\-]+)/reject$', views.report_reject),

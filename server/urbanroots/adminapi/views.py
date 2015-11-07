@@ -4,6 +4,9 @@ from django.http import HttpResponse
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.csrf import csrf_exempt
+import json
+
 
 from adminapi.models import Job, UserVolunteer, JobsList
 
@@ -19,6 +22,7 @@ def volunteers(request):
 
     return render(request, '', context_dict)
 
+@csrf_exempt
 def volunteer_apply(request):
     """ Records a new volunteer """
     # POST
@@ -112,10 +116,14 @@ def reports(request):
     reports = Job.objects.all()
     context_dict['reports'] = reports
     
-    return render(request, '', context_dict)
+    return render(request, 'reports.html', context_dict)
 
-def report_submit(request, userid):
+
+
+@csrf_exempt
+def report_submit(request):
     """ User of the app submits a report """
+
     # POST
     json_req = request.body
     jdict = json.loads(json_req)[0]
@@ -172,6 +180,7 @@ def report(request, report_id):
 
     return render(request, '', context_dict)
 
+@csrf_exempt
 def job(request, jobid):
     """ User views a job from the app """
     # GET
