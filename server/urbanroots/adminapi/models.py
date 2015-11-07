@@ -17,7 +17,8 @@ class UserVolunteer(models.Model):
     skills = models.CharField(max_length=128, blank=True, null=True)
 
     accepted = models.BooleanField(default=False)
-
+    # def save(self, *args, **kwargs):
+    #     super(UserProfile, self).save(*args, **kwargs)
     # relationships
     # don't uncomment!
     # skills_list = models.ForeignKey(SkillsList, blank=True, null=True)
@@ -25,7 +26,9 @@ class UserVolunteer(models.Model):
 
 
 # Urban Roots Admin
-class URAdmin(models.Model):
+class UserOwner(models.Model):
+
+    user = models.OneToOneField(User)
 
     def __unicode__(self):
         return self.user.username

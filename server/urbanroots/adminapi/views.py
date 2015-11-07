@@ -9,6 +9,9 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 
 import json
+import logging
+logging.basicConfig(filename='wtf.log',level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 from adminapi.models import Job, Area, UserVolunteer, JobsList
 
@@ -18,10 +21,9 @@ def index(request):
 def volunteers(request):
     """ Display list of all volunteers """
     context_dict = {}
-    context_dict['volunteers'] = volunteers
     volunteers = UserVolunteer.objects.all()
-
-    return render(request, '', context_dict)
+    context_dict['volunteers'] = volunteers
+    return render(request, 'volunteers.html', context_dict)
 
 @csrf_exempt
 def volunteer_apply(request):
@@ -124,13 +126,13 @@ def report_submit(request, userid):
     """ User of the app submits a report """
 
     # POST
+    logger.info(request.body)
     json_req = str(request.body)[2:-1].replace("\\n", "")
     print(json_req)
     jdict = json.loads(json_req)
 
-    try:
-        user = User.objects.get(id=userid)
-        Job.objects.create(name=jdict['name'],
+    user = User.objects.get(id=userid)
+    Job.objects.create(name=jdict['name'],
                        #created=jdict['created'],
                        #completed=jdict['completed'],
                        #accepted=jdict['accepted'],
@@ -139,8 +141,6 @@ def report_submit(request, userid):
                        location=Area.objects.get(name=jdict['location']),
                        description=jdict['description'],
                        creator=user)
-    except:
-        return HttpResponse(status=503)
         
     # OK
     return HttpResponse(json.dumps({'success': 'true'}))
@@ -152,7 +152,7 @@ def report_accept(request, reportid):
     rep.accepted = True
 
     # refresh page
-    return report(request, reportid)
+    return HttpResponse(status=200)
 
 def report_reject(request, reportid):
     """ Admin rejects a report """
@@ -163,13 +163,14 @@ def report_reject(request, reportid):
     # refresh page
     return report(request, reportid)
 
-def report(request, report_id):
+
+def report(request, reportid):
     """ Admin views a report """
     # GET
     context_dict = {}
 
     # fetch report data
-    report = Job.objects.get(id=report_id)
+    report = Job.objects.get(id=reportid)
     context_dict['report_name'] = report.name
     context_dict['report_creation_date'] = report.created
     context_dict['report_completion_date'] = report.completed
