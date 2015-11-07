@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect
 
 from adminapi.models import Job
 
@@ -109,18 +110,31 @@ def job(request, jobid):
     return JsonResponse(context_dict)
 
 
-# def user_login(reuest):
-#
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#
-#         user = authenticate(username=userame, password=password)
-#
-#         if user:
-#             if user.is.active:
-#                 login(request, login)
-#
+def user_login(request):
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                # valid active account
+                login(request, login)
+                return HttpResponseRedirect('/')
+
+            else:
+                # inactive account
+                return HttpResponse("Account disabled")
+
+        else:
+            # bad login
+            return HttpResponse("Invalid login details")
+
+    else:
+        return render(request, '/login.html', {})
+
     
 def job_accept(request, jobid):
     # mark job as accepted

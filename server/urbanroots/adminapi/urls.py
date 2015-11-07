@@ -20,4 +20,6 @@ urlpatterns = patterns('',
                        url(r'^job/(?P<jobid>[\w\-]+)$', views.job),
                        url(r'^job/(?P<jobid>[\w\-]+)/accept$', views.job_accept),
                        url(r'^job/(?P<jobid>[\w\-]+)/reject$', views.job_reject),
+
+                       url(r'^login/$', views.user_login, name='login'),
 )
