@@ -49,12 +49,13 @@ def volunteer_accept(request, userid):
     context_dict = {}
     try:
         u = User.objects.get(id=userid)
-        v = UserVolunteer.get(user=u)
+        v = UserVolunteer.objects.get(user=u)
         v.accepted=True
-    except Entry.DoesNotExist:
-        return HttpResponse(404)
+        v.save()
+    except User.DoesNotExist:
+        return HttpResponse(status=404)
 
-    return volunteer(request, userid)
+    return HttpResponse(status=200)
 
 def volunteer_reject(request, userid):
     """ Admin rejects a volunteer application """

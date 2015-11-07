@@ -21,7 +21,7 @@ skills = [
 ]
 
 areas = [
-    "Torgglen",
+    "Toryglen",
     "Castlemilk",
     "Govan",
     "Ibrox",
