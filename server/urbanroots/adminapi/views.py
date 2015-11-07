@@ -27,22 +27,20 @@ def volunteers(request):
 def volunteer_apply(request):
     """ Records a new volunteer """
     # POST
-    try:
-        json_req = request.body
-        jdict = json.loads(json_req)[0]
-
-        u = User.objects.get_or_create(username=jdict['username'],
-                                       first_name=jdict['first_name'],
-                                       last_name=jdict['last_name'],
-                                       password=jdict['password'])[0]
-        UserVolunteer.objects.create(user = u,
-                                     phone_number=jdict['phone_number'])
-    except:
-        return HttpResponse(status=404)
-        
-    return HttpResponse(status=200)
+    json_req = str(request.body)[2:-1].replace("\\n", "")
+    jdict = json.loads(json_req)
     
+    u = User.objects.get_or_create(username=jdict['username'],
+                                   first_name=jdict['first_name'],
+                                   last_name=jdict['last_name'],
+                                   password=jdict['password'])[0]
+    UserVolunteer.objects.create(user = u,
+                                 phone_number=jdict['phone_number'],
+                                 address="",
+                                 skills="")
+    return HttpResponse(json.dumps({"success": "true"}))
 
+@csrf_exempt
 def volunteer_accept(request, userid):
     """ Admin accepts a volunteer application """
     context_dict = {}

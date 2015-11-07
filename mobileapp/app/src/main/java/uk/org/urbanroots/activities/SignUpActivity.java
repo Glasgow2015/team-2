@@ -5,6 +5,7 @@ import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -65,7 +66,7 @@ public class SignUpActivity extends AppCompatActivity {
                 lname.isEmpty() ||
                 contact.isEmpty() ||
                 location.isEmpty())
-        Toast.makeText(getApplicationContext(), "Data missing", Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(),"Data missing", Toast.LENGTH_LONG).show();
         else {
 
             // Send data to server here
