@@ -2,6 +2,7 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 
+
 # Volunteer
 class UserVolunteer(models.Model):
 
@@ -13,6 +14,7 @@ class UserVolunteer(models.Model):
     # additional attributes
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     address = models.CharField(max_length=128, blank=True, null=True)
+    skills = models.CharField(max_length=128, blank=True, null=True)
 
     accepted = models.BooleanField(default=False)
 
