@@ -9,6 +9,9 @@ from django.http import HttpResponse
 from django.contrib.auth.models import User
 
 import json
+import logging
+logging.basicConfig(filename='wtf.log',level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 from adminapi.models import Job, Area, UserVolunteer, JobsList
 
@@ -124,13 +127,13 @@ def report_submit(request, userid):
     """ User of the app submits a report """
 
     # POST
+    logger.info(request.body)
     json_req = str(request.body)[2:-1].replace("\\n", "")
     print(json_req)
     jdict = json.loads(json_req)
 
-    try:
-        user = User.objects.get(id=userid)
-        Job.objects.create(name=jdict['name'],
+    user = User.objects.get(id=userid)
+    Job.objects.create(name=jdict['name'],
                        #created=jdict['created'],
                        #completed=jdict['completed'],
                        #accepted=jdict['accepted'],
@@ -139,8 +142,6 @@ def report_submit(request, userid):
                        location=Area.objects.get(name=jdict['location']),
                        description=jdict['description'],
                        creator=user)
-    except:
-        return HttpResponse(status=503)
         
     # OK
     return HttpResponse(json.dumps({'success': 'true'}))
