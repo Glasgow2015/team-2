@@ -9,19 +9,20 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import uk.org.urbanroots.network.Requests;
 import uk.org.urbanroots.urbanroots.R;
 import uk.org.urbanroots.util.ToolbarVisualiser;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    EditText etTitle;
-    EditText etFname;
-    EditText etLname;
-    EditText etContact;
-    EditText etLocation;
-    EditText etEmail;
-    EditText etPassword;
-    EditText etSkills;
+    private EditText etTitle;
+    private EditText etFname;
+    private EditText etLname;
+    private EditText etContact;
+    private EditText etLocation;
+    private EditText etEmail;
+    private EditText etPassword;
+    private EditText etSkills;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,14 +38,9 @@ public class SignUpActivity extends AppCompatActivity {
         etContact = (EditText) findViewById(R.id.et_phone);
         etLocation = (EditText) findViewById(R.id.et_location);
         etSkills = (EditText) findViewById(R.id.et_skills);
-
-
-       // Log.d(LoginScreen.LOG_TAG, "test");
-
     }
 
     public void submitRegistration(View view) {
-
         final String email = etEmail.getText().toString();
         final String password = etPassword.getText().toString();
         final String fname = etFname.getText().toString();
@@ -61,6 +57,7 @@ public class SignUpActivity extends AppCompatActivity {
         Log.d(LoginScreen.LOG_TAG, location);
         Log.d(LoginScreen.LOG_TAG, skills);
 
+        String url = Requests.getInstance().getBaseUrl() + "volunteer/apply";
 
         if (    email.isEmpty() ||
                 password.isEmpty() ||
@@ -70,10 +67,11 @@ public class SignUpActivity extends AppCompatActivity {
                 location.isEmpty())
         Toast.makeText(getApplicationContext(), "Data missing", Toast.LENGTH_LONG).show();
         else {
+
             // Send data to server here
-            Toast.makeText(getApplicationContext(), "Registration Successfull", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, LoginScreen.class);
-            startActivity(intent);
+//            Toast.makeText(getApplicationContext(), "Registration Successfull", Toast.LENGTH_LONG).show();
+//            Intent intent = new Intent(this, LoginScreen.class);
+//            startActivity(intent);
         }
     }
 
