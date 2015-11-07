@@ -24,4 +24,14 @@ public class LoginScreen extends AppCompatActivity {
         Intent intent = new Intent(this, ReportIssueActivity.class);
         startActivity(intent);
     }
+
+    public void signUp(View view) {
+        Intent intent = new Intent(this, SignUpActivity.class);
+        startActivity(intent);
+    }
+
+    public void signIn(View view) {
+        Intent intent = new Intent(this, SignInActivity.class);
+        startActivity(intent);
+    }
 }

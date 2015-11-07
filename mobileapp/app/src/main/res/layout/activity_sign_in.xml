@@ -8,4 +8,38 @@
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
 
+
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/et_email"
+        android:hint="@string/signup_email"
+        android:width="300dp"
+        android:layout_below="@+id/app_bar"
+        android:layout_marginTop="150dp"
+        android:layout_centerHorizontal="true"
+        android:inputType="textEmailAddress" />
+
+    <EditText
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textPassword"
+        android:width="300dp"
+        android:id="@+id/et_password"
+        android:hint="@string/signup_password"
+        android:layout_below="@+id/et_email"
+        android:layout_alignLeft="@+id/et_email"
+        android:layout_alignStart="@+id/et_email" />
+
+    <Button
+        android:layout_width="150dp"
+        android:layout_height="60dp"
+        android:text="Submit"
+        android:id="@+id/b_submit"
+        android:layout_marginTop="90dp"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/et_password"
+        android:onClick="submitSignIn" />
 </RelativeLayout>
