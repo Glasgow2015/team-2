@@ -25,22 +25,87 @@ def volunteer(request):
     pass
 
 def reports(request):
-    pass
+    # GET 
+    context_dict = {}
+
+    # reports
+    reports = Jobs.objects.all()
+    context_dict['reports'] = reports
+    
+    return render(request, '', context_dict)
 
 def report_submit(request):
-    pass
+    # POST
+    json_req = request.body
+    jdict = json.loads(json_req)[0]
+
+    # JOB object -> db
+    try:
+        Job.objects.create(name=jdict['name'],
+                       created=jdict['created'],
+                       completed=jdict['completed'],
+                       accepted=jdict['accepted'],
+                       latitude=jdict['latitude'],
+                       longitude=jdict['longitude'],
+                       description=jdict['description'])
+    except:
+        # Fail
+        return HttpResponse(status=404)
+        
+    # OK
+    return HttpResponse(status=200)
 
 def report_accept(request, reportid):
-    pass
+    # mark report as accepted
+    rep = Job.objects.get(id=reportid)
+    rep.accepted = True
+
+    # refresh page
+    return report(request, reportid)
 
 def report_reject(request, reportid):
-    pass
+    # delete report alltogether
+    rep = Job.objects.get(id=reportid)
+    rep.delete()
 
-def report(request):
-    pass
+    # refresh page
+    return report(request, reportid)
+
+def report(request, report_id):
+    # GET
+    context_dict = {}
+
+    # fetch report data
+    report = Jobs.objects.get(id=report_id)
+    context_dict['report_name'] = report.name
+    context_dict['report_creation_date'] = report.created
+    context_dict['report_completion_date'] = report.completed
+    context_dict['report_accepted'] = report.accepted
+    context_dict['report_latitude'] = report.latitude
+    context_dict['report_longitude'] = report.longitude
+    context_dict['report_description'] = report.description
+
+    return render(request, '', context_dict)
 
 def job(request, jobid):
-    pass
+    # GET
+    context_dict = {}
+    
+    # fetch report data
+    report = Jobs.objects.get(id=report_id)
+    context_dict['report_name'] = report.name
+    context_dict['report_creation_date'] = report.created
+    context_dict['report_completion_date'] = report.completed
+    context_dict['report_accepted'] = report.accepted
+    context_dict['report_latitude'] = report.latitude
+    context_dict['report_longitude'] = report.longitude
+    context_dict['report_description'] = report.description
+    
+    return JsonResponse(context_dict)
+
+
+
+    
 
 def job_accept(request, jobid):
     pass
