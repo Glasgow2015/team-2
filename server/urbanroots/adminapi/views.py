@@ -2,9 +2,11 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+
 import json
 
-from adminapi.models import Job
+from adminapi.models import Job, Area
 
 
 def index(request):
@@ -96,22 +98,22 @@ def reports(request):
 @csrf_exempt
 def report_submit(request):
     # POST
-    json_req = request.body
-    jdict = json.loads(json_req)[0]
+    json_req = str(request.body)[2:-1].replace("\\n", "")
+    print(json_req)
+    jdict = json.loads(json_req)
 
     # JOB object -> db
     try:
         Job.objects.create(name=jdict['name'],
-                       created=jdict['created'],
-                       completed=jdict['completed'],
-                       accepted=jdict['accepted'],
+                       #created=jdict['created'],
+                       #completed=jdict['completed'],
+                       #accepted=jdict['accepted'],
                        latitude=jdict['latitude'],
                        longitude=jdict['longitude'],
-                       location=jdict['location'],
+                       location=Area.objects.get(name=jdict['location']),
                        description=jdict['description'])
     except:
-        # Fail
-        return HttpResponse(status=404)
+        return HttpResponse(status=503)
         
     # OK
     return HttpResponse(status=200)

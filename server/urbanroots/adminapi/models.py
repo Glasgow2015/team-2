@@ -50,8 +50,8 @@ class Job(models.Model):
     created = models.DateTimeField(default=datetime.now, blank=True, null=True)
     completed = models.DateTimeField(blank=True, null=True)
     accepted = models.BooleanField(default=False)
-    latitude = models.DecimalField(max_digits=10, decimal_places=10, blank=True,null=True)
-    longitude = models.DecimalField(max_digits=10, decimal_places=10, blank=True, null=True)
+    latitude = models.DecimalField(max_digits=100, decimal_places=10, blank=True,null=True)
+    longitude = models.DecimalField(max_digits=100, decimal_places=10, blank=True, null=True)
     description = models.TextField()
     location = models.ForeignKey(Area, null=True) # this probably shouldn't be null
 
