@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+
+<html>
+<head lang="en">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Urban Rooots admin page">
+
+
+    <!-- added a customized favicon  -g -->
+
+    <title>Urban roots - {% block title %}{% endblock %}</title>
+    <link href="{{ STATIC_URL }}css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mystyle.css">
+    
+
+
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+
+    <![endif]-->
+
+</head>
+<body>
+
+{% load staticfiles %}
+{% csrf_token %}
+
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+
+        <div class="navbar-header">
+            <ul class="nav navbar-nav navbar-left">
+                <li><a class="navbar-brand" href="/peer_reply/" id="brand_name">Urban Roots</a></li>
+
+                <li>
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                            data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+
+                </li>
+            </ul>
+        </div>
+        <div class="navbar-collapse collapse">
+
+            <ul class="nav navbar-nav navbar-right">
+
+               
+
+
+
+            </ul>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+<div class="row">
+<div class="col-md-2">
+            <div class="sidebar-nav-fixed affix hidden-xs hidden-sm" id="left-block">
+{% block left_block %}
+
+{% endblock %}
+</div>
+    </div>
+<div id="centre_block" class="col-md-8">
+
+    {% block body_block %}{% endblock %}
+
+</div>
+
+{% block right_block %}
+
+{% endblock %}
+    </div>
+</div>
+<!-- Bootstrap core JavaScript
+                            = -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<s
+<!--</script>-->
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>
