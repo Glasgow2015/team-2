@@ -223,7 +223,7 @@ def user_login(request):
             return HttpResponse("Invalid login details")
 
     else:
-        return render(request, '/login.html', {})
+        return render(request, 'login.html', {})
 
     
 def job_accept(request, jobid):
