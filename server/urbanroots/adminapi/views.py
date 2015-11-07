@@ -1,36 +1,115 @@
+import json
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.csrf import csrf_exempt
+import json
 
-from adminapi.models import Job
+
+
+from adminapi.models import Job, UserVolunteer, JobsList
 
 
 def index(request):
     return render(request, 'index.html')
 
 def volunteers(request):
-    pass
+    """ Display list of all volunteers """
+    context_dict = {}
+    context_dict['volunteers'] = volunteers
+    volunteers = UserVolunteer.objects.all()
 
+    return render(request, '', context_dict)
+
+@csrf_exempt
 def volunteer_apply(request):
-    pass
+    """ Records a new volunteer """
+    # POST
+    try:
+        json_req = request.body
+        jdict = json.loads(json_req)[0]
+
+        u = User.objects.get_or_create(username=jdict['username'],
+                                       first_name=jdict['first_name'],
+                                       last_name=jdict['last_name'],
+                                       password=jdict['password'])[0]
+        UserVolunteer.objects.create(user = u,
+                                     phone_number=jdict['phone_number'])
+    except:
+        return HttpResponse(status=404)
+        
+    return HttpResponse(status=200)
+    
 
 def volunteer_accept(request, userid):
-    pass
+    """ Admin accepts a volunteer application """
+    context_dict = {}
+    try:
+        u = User.objects.get(id=userid)
+        v = UserVolunteer.get(user=u)
+        v.accepted=True
+    except Entry.DoesNotExist:
+        return HttpResponse(404)
+
+    return volunteer(request, userid)
 
 def volunteer_reject(request, userid):
-    pass
+    """ Admin rejects a volunteer application """
+    u = User.objects.get(id=userid)
+    v = UserVolunteer.get(user=u)
+    v.delete()
+    u.delete()
+
+    return volunteers(request)
 
 def volunteer_jobs(request, userid):
-    pass
+    """ Inspect a user's jobs list """
+    context_dict = {}
+
+    try:
+        user_v = User.objects.get(id=userid)
+        vol = UserVolunteer.objects.get(user=user_v)
+        context_dict['jobs'] = JobsList.objects.get(volunteer=vol)
+    except Entry.DoesNotExist:
+        return HttpResponse(404)
+
+    return render(request, '', context_dict)
 
 def volunteer_assign(request, userid, jobid):
-    pass
+    """ Assign a job to a volunteer """
+    try:
+        user_v = User.objects.get(id=userid)
+        vol = UserVolunteer.objects.get(user=user_v)
+        job_v = Job.objects.get(id=jobid)
+        JobsList.objects.get_or_create(volunteer=vol,
+                                       job=job_v)
+    except Entry.DoesNotExist:
+        return HttpResponse(404)
 
-def volunteer(request):
-    pass
+    return volunteer(request, userid)
 
+def volunteer(request, userid):
+    """ View a volunteer's profile """
+    context_dict = {}
+
+    try:
+        user_v = User.objects.get(id=userid)
+        volunteer = UserVolunteer.objects.get(user=user_v)
+        context_dict['phone_number'] = volunteer.phone_number
+        context_dict['username'] = user_v.username
+        context_dict['first_name'] = user_v.first_name
+        context_dict['last_name'] = user_v.last_name
+
+    except Entry.DoesNotExist:
+        return HttpResponse(404)
+
+    return render(request, '', context_dict)
+
+        
 def reports(request):
+    """ View a list of all reports """
     # GET 
     context_dict = {}
 
@@ -38,22 +117,28 @@ def reports(request):
     reports = Job.objects.all()
     context_dict['reports'] = reports
     
-    return render(request, '', context_dict)
+    return render(request, 'reports.html', context_dict)
 
+
+
+@csrf_exempt
 def report_submit(request):
+    """ User of the app submits a report """
+
     # POST
     json_req = request.body
     jdict = json.loads(json_req)[0]
 
-    # JOB object -> db
     try:
+        user = User.objects.get(id=userid)
         Job.objects.create(name=jdict['name'],
-                       created=jdict['created'],
-                       completed=jdict['completed'],
-                       accepted=jdict['accepted'],
-                       latitude=jdict['latitude'],
-                       longitude=jdict['longitude'],
-                       description=jdict['description'])
+                           created=jdict['created'],
+                           completed=jdict['completed'],
+                           accepted=jdict['accepted'],
+                           latitude=jdict['latitude'],
+                           longitude=jdict['longitude'],
+                           description=jdict['description'],
+                           creator=user)
     except:
         # Fail
         return HttpResponse(status=404)
@@ -62,6 +147,7 @@ def report_submit(request):
     return HttpResponse(status=200)
 
 def report_accept(request, reportid):
+    """ Admin accepts a report """
     # mark report as accepted
     rep = Job.objects.get(id=reportid)
     rep.accepted = True
@@ -70,6 +156,7 @@ def report_accept(request, reportid):
     return report(request, reportid)
 
 def report_reject(request, reportid):
+    """ Admin rejects a report """
     # delete report alltogether
     rep = Job.objects.get(id=reportid)
     rep.delete()
@@ -78,6 +165,7 @@ def report_reject(request, reportid):
     return report(request, reportid)
 
 def report(request, report_id):
+    """ Admin views a report """
     # GET
     context_dict = {}
 
@@ -93,7 +181,9 @@ def report(request, report_id):
 
     return render(request, '', context_dict)
 
+@csrf_exempt
 def job(request, jobid):
+    """ User views a job from the app """
     # GET
     context_dict = {}
     
@@ -137,7 +227,7 @@ def user_login(request):
 
     
 def job_accept(request, jobid):
-    # mark job as accepted
+    """ Admin marks a job as accepted """
     try:
         job = Job.objects.get(id=jobid)
         job.accepted=True
@@ -147,5 +237,12 @@ def job_accept(request, jobid):
     return HttpResponse(status=200)
 
 def job_reject(request, jobid):
-    pass
+    """ Admin rejects a job """
+    try:
+        job = Job.objects.get(id=jobid)
+        job.delete()
+    except Entry.DoesNotExist:
+        return HttpResponse(status=404)
+
+    return HttpResponse(status=200)
 
