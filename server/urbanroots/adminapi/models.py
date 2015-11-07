@@ -11,7 +11,8 @@ class UserVolunteer(models.Model):
     user = models.OneToOneField(User)
 
     # additional attributes
-    phone_number = models.CharField(max_length=15, blank=True)
+    phone_number = models.CharField(max_length=15, blank=True, null=True)
+    address = models.CharField(max_length=128, blank=True, null=True)
 
     accepted = models.BooleanField(default=False)
 
