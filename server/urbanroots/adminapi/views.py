@@ -127,6 +127,7 @@ def report_submit(request, userid):
 
     # POST
     json_req = str(request.body)[2:-1].replace("\\n", "")
+    print(json_req)
     jdict = json.loads(json_req)
 
     try:
@@ -144,7 +145,7 @@ def report_submit(request, userid):
         return HttpResponse(status=503)
         
     # OK
-    return HttpResponse(status=200)
+    return HttpResponse(json.dumps({'success': 'true'}))
 
 def report_accept(request, reportid):
     """ Admin accepts a report """
