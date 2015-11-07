@@ -9,7 +9,7 @@ from django.contrib.auth.models import User
 
 # Area Name
 class Area(models.Model):
-    name = models.CharField(max_length=128, Unique=True)
+    name = models.CharField(max_length=128, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -17,7 +17,7 @@ class Area(models.Model):
 
 # Job Category
 class Category(models.Model):
-    name = models.CharField(max_length=128, Unique=True)
+    name = models.CharField(max_length=128, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -38,8 +38,8 @@ class Job(models.Model):
 
 
 # Volunteer Skills
-class Skills(models.Model):
-    name = models.CharField(max_length=128, Unique=True)
+class Skill(models.Model):
+    name = models.CharField(max_length=128, unique=True)
 
     def __unicode__(self):
         return self.name
