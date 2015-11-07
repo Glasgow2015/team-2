@@ -2,6 +2,9 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
+from models import Job
+
+
 def index(request):
     return render(request, 'index.html')
 

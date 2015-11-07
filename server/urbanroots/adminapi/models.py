@@ -13,6 +13,8 @@ class UserVolunteer(models.Model):
     # additional attributes
     phone_number = models.CharField(max_length=15, blank=True)
 
+    accepted = models.BooleanField(default=False)
+
     # relationships
     # don't uncomment!
     # skills_list = models.ForeignKey(SkillsList, blank=True, null=True)
