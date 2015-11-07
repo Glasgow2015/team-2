@@ -13,6 +13,8 @@ class UserVolunteer(models.Model):
     # additional attributes
     phone_number = models.CharField(max_length=15, blank=True)
 
+    accepted = models.BooleanField(default=False)
+
     # relationships
     # don't uncomment!
     # skills_list = models.ForeignKey(SkillsList, blank=True, null=True)
@@ -51,6 +53,7 @@ class Job(models.Model):
     latitude = models.DecimalField(max_digits=10, decimal_places=10, blank=True,null=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=10, blank=True, null=True)
     description = models.TextField()
+    location = models.ForeignKey(Area, null=True) # this probably shouldn't be null
 
     # Relationships
     creator = models.ForeignKey(User, blank=True, null=True)
@@ -87,3 +90,10 @@ class AreasList(models.Model):
         unique_together = ('volunteer', 'area')
 
 
+# List of jobs
+class JobsList(models.Model):
+    volunteer = models.ForeignKey(UserVolunteer, related_name='volunteer_jobs')
+    job = models.ForeignKey(Job, related_name='job')
+
+    class Meta:
+        unique_together = ('volunteer', 'job')
