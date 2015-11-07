@@ -11,7 +11,7 @@
     <!-- added a customized favicon  -g -->
 
     <title>Urban roots - {% block title %}{% endblock %}</title>
-    <link rel="stylesheet" type="text/css" href="{{ STATIC_URL }}css/mystyle.css">
+    <link rel="stylesheet" type="text/css" href="{{ BASE_DIR }}/static/css/style.css">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -72,7 +72,7 @@
 {% endblock %}
 </div>
     </div>
-<div id="centre_block" class="col-md-8">
+<div id="centre_block" class="col-md-10">
 
     {% block body_block %}{% endblock %}
 
@@ -90,7 +90,6 @@
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 
-<s
 <!--</script>-->
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->

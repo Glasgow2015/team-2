@@ -33,7 +33,7 @@ def reports(request):
     reports = Job.objects.all()
     context_dict['reports'] = reports
     
-    return render(request, '', context_dict)
+    return render(request, 'reports.html', context_dict)
 
 def report_submit(request):
     # POST
