@@ -1,4 +1,12 @@
 <resources>
     <string name="app_name">Urban Roots</string>
     <string name="title_activity_login_screen">LoginScreen</string>
+    <string name="report_problem">Report an issue</string>
+    <string name="sign_up_text">Sign Up</string>
+    <string name="sign_in_text">Sign In</string>
+    <string name="problem_title">Title</string>
+    <string name="issue_description">Issue Description</string>
+    <string name="pick_location">Pick Location</string>
+    <string name="default_location_text">Torgglen</string>
+    <string name="send_report">Send Report</string>
 </resources>
