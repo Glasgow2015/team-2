@@ -7,6 +7,13 @@ from adminapi.models import Skill, Area
 skills = [
     "Gardening",
     "Repair",
+    "Lifting heavy objects",
+    "Cycling",
+    "Painting",
+    "Landscaping",
+    "Mechnical repairs",
+    "Fertilisation",
+    "Pest control",
 ]
 
 areas = [
