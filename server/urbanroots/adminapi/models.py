@@ -2,6 +2,26 @@ from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
 
+# Intersecting Entities to resolve Many to Many rels
+
+# List of Skills for Volunteers
+class SkillsList(models.Model):
+    volunteer = models.ForeignKey(UserVolunteer, related_name='volunteer')
+    skill = models.ForeignKey(Skill, related_name='skill')
+
+    class Meta:
+        unique_together = ('volunteer', 'skill')
+
+
+# List of areas Volunteers are interested in
+class AreasList(models.Model):
+    volunteer = models.ForeignKey(UserVolunteer, related_name='volunteer')
+    area = models.ForeignKey(Area, trlated_name='area')
+
+    class Meta:
+        unique_together = ('volunteer', 'area')
+
+
 
 # Volunteer
 class UserVolunteer(models.Model):
@@ -65,25 +85,5 @@ class Skill(models.Model):
 
     def __unicode__(self):
         return self.name
-
-
-# Intersecting Entities to resolve Many to Many rels
-
-# List of Skills for Volunteers
-class SkillsList(models.Model):
-    volunteer = models.ForeignKey(UserVolunteer, related_name='volunteer')
-    skill = models.ForeignKey(Skill, related_name='skill')
-
-    class Meta:
-        unique_together = ('volunteer', 'skill')
-
-
-# List of areas Volunteers are interested in
-class AreasList(models.Model):
-    volunteer = models.ForeignKey(UserVolunteer, related_name='volunteer')
-    area = models.ForeignKey(Area, trlated_name='area')
-
-    class Meta:
-        unique_together = ('volunteer', 'area')
 
 
