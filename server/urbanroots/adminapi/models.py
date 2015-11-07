@@ -53,6 +53,7 @@ class Job(models.Model):
     latitude = models.DecimalField(max_digits=10, decimal_places=10, blank=True)
     longitude = models.DecimalField(max_digits=10, decimal_places=10, blank=True)
     description = models.TextField()
+    location = models.ForeignKey(Area, null=True) # this probably shouldn't be null
 
     # Relationships
     creator = models.ForeignKey(User, blank=True, null=True)
