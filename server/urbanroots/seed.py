@@ -5,6 +5,8 @@ django.setup()
 from adminapi.models import Skill, Area, UserVolunteer, SkillsList, AreasList
 from django.contrib.auth.models import User
 
+# Add skills and areas
+
 skills = [
     "Gardening",
     "Repair",
@@ -34,6 +36,8 @@ for skill in skills:
 
 for area in areas:
     Area(name=area).save()
+
+# Add volunteers
 
 volunteers = [
     ("cshtarkov", "Christian Shtarkov"),
@@ -65,4 +69,4 @@ for volunteer in volunteers:
     #for area_list in AreasList.objects.all():
         #print(area_list.volunteer.user.first_name, area_list.area.name)
     
-                                        
+# Add jobs
