@@ -1,5 +1,9 @@
 from django.shortcuts import render
+from django.contrib.auth import authenticate, login
+from django.contrib.auth.decorators import login_required
+
 from models import Job
+
 
 def index(request):
     return render(request, 'index.html')
@@ -102,7 +106,27 @@ def job(request, jobid):
     context_dict['report_longitude'] = report.longitude
     context_dict['report_description'] = report.description
     
+<<<<<<< HEAD
     return JsonResponse(context_dict)    
+=======
+    return JsonResponse(context_dict)
+
+
+# def user_login(reuest):
+#
+#     if request.method == 'POST':
+#         username = request.POST.get('username')
+#         password = request.POST.get('password')
+#
+#         user = authenticate(username=userame, password=password)
+#
+#         if user:
+#             if user.is.active:
+#                 login(request, login)
+#
+
+    
+>>>>>>> 950380786d53031410b167454c8df88e7e60afa0
 
 def job_accept(request, jobid):
     # mark job as accepted

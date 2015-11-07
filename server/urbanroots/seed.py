@@ -1,3 +1,4 @@
+import os
 os.environ['DJANGO_SETTINGS_MODULE'] = 'urbanroots.settings'
 import django
 django.setup()
