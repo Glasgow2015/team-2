@@ -1,36 +1,50 @@
+import json
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponse, HttpResponseRedirect
+from django.core.exceptions import ObjectDoesNotExist
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from django.contrib.auth.models import User
 
-from adminapi.models import Job
+import json
 
+from adminapi.models import Job, Area, UserVolunteer, JobsList
 
 def index(request):
     return render(request, 'index.html')
 
 def volunteers(request):
+    """ Display list of all volunteers """
     context_dict = {}
     context_dict['volunteers'] = volunteers
     volunteers = UserVolunteer.objects.all()
 
     return render(request, '', context_dict)
 
+@csrf_exempt
 def volunteer_apply(request):
+    """ Records a new volunteer """
     # POST
-    json_req = request.body
-    jdict = json.loads(json_req)[0]
+    try:
+        json_req = request.body
+        jdict = json.loads(json_req)[0]
 
-    u = User.objects.get_or_create(username=jdict['username'],
-                                   first_name=jdict['first_name'],
-                                   last_name=jdict['last_name'],
-                                   password=jdict['password'])[0]
-    UserVolunteer.objects.create(user = u,
-                                 phone_number=jdict['phone_number'])
-
+        u = User.objects.get_or_create(username=jdict['username'],
+                                       first_name=jdict['first_name'],
+                                       last_name=jdict['last_name'],
+                                       password=jdict['password'])[0]
+        UserVolunteer.objects.create(user = u,
+                                     phone_number=jdict['phone_number'])
+    except:
+        return HttpResponse(status=404)
+        
     return HttpResponse(status=200)
     
 
 def volunteer_accept(request, userid):
+    """ Admin accepts a volunteer application """
     context_dict = {}
     try:
         u = User.objects.get(id=userid)
@@ -42,6 +56,7 @@ def volunteer_accept(request, userid):
     return volunteer(request, userid)
 
 def volunteer_reject(request, userid):
+    """ Admin rejects a volunteer application """
     u = User.objects.get(id=userid)
     v = UserVolunteer.get(user=u)
     v.delete()
@@ -50,6 +65,7 @@ def volunteer_reject(request, userid):
     return volunteers(request)
 
 def volunteer_jobs(request, userid):
+    """ Inspect a user's jobs list """
     context_dict = {}
 
     try:
@@ -62,9 +78,20 @@ def volunteer_jobs(request, userid):
     return render(request, '', context_dict)
 
 def volunteer_assign(request, userid, jobid):
-    pass
+    """ Assign a job to a volunteer """
+    try:
+        user_v = User.objects.get(id=userid)
+        vol = UserVolunteer.objects.get(user=user_v)
+        job_v = Job.objects.get(id=jobid)
+        JobsList.objects.get_or_create(volunteer=vol,
+                                       job=job_v)
+    except Entry.DoesNotExist:
+        return HttpResponse(404)
+
+    return volunteer(request, userid)
 
 def volunteer(request, userid):
+    """ View a volunteer's profile """
     context_dict = {}
 
     try:
@@ -82,6 +109,7 @@ def volunteer(request, userid):
 
         
 def reports(request):
+    """ View a list of all reports """
     # GET 
     context_dict = {}
 
@@ -89,30 +117,37 @@ def reports(request):
     reports = Job.objects.all()
     context_dict['reports'] = reports
     
-    return render(request, '', context_dict)
+    return render(request, 'reports.html', context_dict)
 
-def report_submit(request):
+
+
+@csrf_exempt
+def report_submit(request, userid):
+    """ User of the app submits a report """
+
     # POST
-    json_req = request.body
-    jdict = json.loads(json_req)[0]
+    json_req = str(request.body)[2:-1].replace("\\n", "")
+    jdict = json.loads(json_req)
 
-    # JOB object -> db
     try:
+        user = User.objects.get(id=userid)
         Job.objects.create(name=jdict['name'],
-                       created=jdict['created'],
-                       completed=jdict['completed'],
-                       accepted=jdict['accepted'],
+                       #created=jdict['created'],
+                       #completed=jdict['completed'],
+                       #accepted=jdict['accepted'],
                        latitude=jdict['latitude'],
                        longitude=jdict['longitude'],
-                       description=jdict['description'])
+                       location=Area.objects.get(name=jdict['location']),
+                       description=jdict['description'],
+                       creator=user)
     except:
-        # Fail
-        return HttpResponse(status=404)
+        return HttpResponse(status=503)
         
     # OK
     return HttpResponse(status=200)
 
 def report_accept(request, reportid):
+    """ Admin accepts a report """
     # mark report as accepted
     rep = Job.objects.get(id=reportid)
     rep.accepted = True
@@ -121,6 +156,7 @@ def report_accept(request, reportid):
     return report(request, reportid)
 
 def report_reject(request, reportid):
+    """ Admin rejects a report """
     # delete report alltogether
     rep = Job.objects.get(id=reportid)
     rep.delete()
@@ -129,6 +165,7 @@ def report_reject(request, reportid):
     return report(request, reportid)
 
 def report(request, report_id):
+    """ Admin views a report """
     # GET
     context_dict = {}
 
@@ -144,7 +181,9 @@ def report(request, report_id):
 
     return render(request, '', context_dict)
 
+@csrf_exempt
 def job(request, jobid):
+    """ User views a job from the app """
     # GET
     context_dict = {}
     
@@ -161,21 +200,34 @@ def job(request, jobid):
     return JsonResponse(context_dict)
 
 
-# def user_login(reuest):
-#
-#     if request.method == 'POST':
-#         username = request.POST.get('username')
-#         password = request.POST.get('password')
-#
-#         user = authenticate(username=userame, password=password)
-#
-#         if user:
-#             if user.is.active:
-#                 login(request, login)
-#
+def user_login(request):
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(username=username, password=password)
+
+        if user:
+            if user.is_active:
+                # valid active account
+                login(request, login)
+                return HttpResponseRedirect('/')
+
+            else:
+                # inactive account
+                return HttpResponse("Account disabled")
+
+        else:
+            # bad login
+            return HttpResponse("Invalid login details")
+
+    else:
+        return render(request, '/login.html', {})
+
     
 def job_accept(request, jobid):
-    # mark job as accepted
+    """ Admin marks a job as accepted """
     try:
         job = Job.objects.get(id=jobid)
         job.accepted=True
@@ -185,5 +237,12 @@ def job_accept(request, jobid):
     return HttpResponse(status=200)
 
 def job_reject(request, jobid):
-    pass
+    """ Admin rejects a job """
+    try:
+        job = Job.objects.get(id=jobid)
+        job.delete()
+    except Entry.DoesNotExist:
+        return HttpResponse(status=404)
+
+    return HttpResponse(status=200)
 

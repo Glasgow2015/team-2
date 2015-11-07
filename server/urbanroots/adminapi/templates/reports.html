@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block body_block %}
+<br>
+<br>
+<br>
+<div id="reports bg-success">
+ <h2>Reports</h2>
+{%  for report in reports %}
+
+<div class="col-md-12 report" >
+
+   <a href="{{ BASE_DIR }}/reports/{{ report.id }}" > <div class="col-md-3 col-md-offset-0 col-lg-3 col-lg-offset-0">
+    <p>Name: {{ report.name }}</p>
+    <p>Date submited: {{ report.created }}</p>
+
+    {% if report.completed %}
+    <p>Date completed {{ report.date_completed }}</p>
+    {% endif %}
+
+    </div>
+
+   <div class="col-lg-7 col-lg-offset-3">
+       <p>{{ report.description }}</p>
+   </div>
+   </a>
+   <div class="col-lg-offset-9 col-lg-3">
+       {% if not report.accepted  %}
+       
+       <button class="btn btn-primary" onclick="accept({{ report.id }})">Accept</button>
+       {% endif %}
+       </div>
+</div>
+
+{% endfor %}
+</div>
+<script>
+    function accept(id){
+    	$.get('/report/accept/', {report_id:id}, function(data){
+         $('#questions').html(data);
+        });
+    }
+</script>
+{% endblock %}
