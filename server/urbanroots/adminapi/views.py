@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
 
-from models import Job
+from adminapi.models import Job
 
 
 def index(request):
@@ -34,7 +34,7 @@ def reports(request):
     context_dict = {}
 
     # reports
-    reports = Jobs.objects.all()
+    reports = Job.objects.all()
     context_dict['reports'] = reports
     
     return render(request, '', context_dict)
@@ -81,7 +81,7 @@ def report(request, report_id):
     context_dict = {}
 
     # fetch report data
-    report = Jobs.objects.get(id=report_id)
+    report = Job.objects.get(id=report_id)
     context_dict['report_name'] = report.name
     context_dict['report_creation_date'] = report.created
     context_dict['report_completion_date'] = report.completed
@@ -97,7 +97,7 @@ def job(request, jobid):
     context_dict = {}
     
     # fetch report data
-    report = Jobs.objects.get(id=report_id)
+    report = Job.objects.get(id=report_id)
     context_dict['report_name'] = report.name
     context_dict['report_creation_date'] = report.created
     context_dict['report_completion_date'] = report.completed
@@ -121,11 +121,16 @@ def job(request, jobid):
 #             if user.is.active:
 #                 login(request, login)
 #
-
     
-
 def job_accept(request, jobid):
-    pass
+    # mark job as accepted
+    try:
+        job = Job.objects.get(id=jobid)
+        job.accepted=True
+    except Entry.DoesNotExist:
+        return HttpResponse(status=404)
+
+    return HttpResponse(status=200)
 
 def job_reject(request, jobid):
     pass
