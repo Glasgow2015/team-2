@@ -13,6 +13,7 @@ urlpatterns = patterns('',
 
                        url(r'^reports/$', views.reports),
                        url(r'^report/submit$', views.report_submit),
+                       url(r'^report/submit/(?P<userid>[\w\-]+)$', views.report_submit),
                        url(r'^report/(?P<reportid>[\w\-]+)/accept/$', views.report_accept),
                        url(r'^report/(?P<reportid>[\w\-]+)/reject/$', views.report_reject),
                        url(r'^report/(?P<reportid>[\w\-]+)$', views.report),

@@ -16,6 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="37dp"
         android:hint="@string/problem_title"
+        android:layout_marginBottom="35dp"
         android:width="300dp"/>
 
     <EditText
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:inputType="textMultiLine"
         android:ems="10"
+        android:layout_marginBottom="35dp"
         android:id="@+id/et_description"
         android:layout_below="@+id/et_title"
         android:layout_centerHorizontal="true"
@@ -34,23 +36,39 @@
         android:id="@+id/b_pick_location"
         android:layout_below="@id/et_description"
         android:layout_centerHorizontal="true"
-        android:text="@string/pick_location"/>
+        android:text="@string/pick_location"
+        android:onClick="pickLocation"
+        android:layout_marginBottom="20dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/b_pick_location"
+        android:id="@+id/tv_chosen_location"
+        android:text="@string/default_location_text"
+        android:textSize="25sp"
+        android:layout_below="@+id/b_pick_location"
         android:layout_centerHorizontal="true"
-        android:text="@string/default_location_text"/>
+        android:layout_marginBottom="20dp" />
 
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/send_report"
         android:id="@+id/b_send_report"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
-        android:onClick="sendReport"/>
+        android:onClick="sendReport"
+        android:layout_below="@+id/tv_chosen_location"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:text="Small Text"
+        android:id="@+id/textView"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="37dp" />
 
 
 </RelativeLayout>

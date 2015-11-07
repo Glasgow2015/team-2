@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="locations">
+        <item>Toryglen</item>
+        <item>Castlemilk</item>
+        <item>Govan</item>
+        <item>Ibrox</item>
+        <item>Priesthill &amp; Greater Pollok</item>
+        <item>Pollokshields</item>
+    </array>
+</resources>
