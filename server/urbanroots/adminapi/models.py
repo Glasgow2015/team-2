@@ -25,7 +25,9 @@ class UserVolunteer(models.Model):
 
 
 # Urban Roots Admin
-class URAdmin(models.Model):
+class UserOwner(models.Model):
+
+    user = models.OneToOneField(User)
 
     def __unicode__(self):
         return self.user.username

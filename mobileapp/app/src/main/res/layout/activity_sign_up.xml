@@ -8,15 +8,7 @@
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceMedium"
-        android:text="@string/signup_toptext"
-        android:layout_centerHorizontal="true"
-        android:gravity="center"
-        android:id="@+id/textView_header"
-        android:layout_below="@+id/app_bar" />
+
 
     <EditText
         android:layout_width="wrap_content"
@@ -24,7 +16,8 @@
         android:id="@+id/et_email"
         android:hint="@string/signup_email"
         android:width="300dp"
-        android:layout_below="@+id/textView_header"
+        android:layout_marginTop="20dp"
+        android:layout_below="@+id/app_bar"
         android:layout_centerHorizontal="true"
         android:inputType="textEmailAddress" />
 
@@ -33,6 +26,7 @@
         android:layout_height="wrap_content"
         android:inputType="textPassword"
         android:width="300dp"
+        android:layout_marginTop="20dp"
         android:id="@+id/et_password"
         android:hint="@string/signup_password"
         android:layout_below="@+id/et_email"
@@ -56,6 +50,7 @@
         android:id="@+id/et_lname"
         android:hint="@string/signup_lname"
         android:width="300dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/et_fname"
         android:layout_alignLeft="@+id/et_fname"
         android:layout_alignStart="@+id/et_fname" />
@@ -68,6 +63,7 @@
         android:id="@+id/et_phone"
         android:hint="@string/signup_phone"
         android:width="300dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/et_lname"
         android:layout_alignLeft="@+id/et_lname"
         android:layout_alignStart="@+id/et_lname"
@@ -79,6 +75,7 @@
         android:id="@+id/et_location"
         android:hint="@string/signup_location"
         android:width="300dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/et_phone"
         android:layout_alignLeft="@+id/et_phone"
         android:layout_alignStart="@+id/et_phone" />
@@ -89,6 +86,7 @@
         android:id="@+id/et_skills"
         android:hint="@string/signup_skills"
         android:width="300dp"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/et_location"
         android:layout_alignLeft="@+id/et_location"
         android:layout_alignStart="@+id/et_location" />
@@ -97,6 +95,7 @@
         android:layout_width="150dp"
         android:layout_height="60dp"
         android:text="Submit"
+        android:layout_marginTop="20dp"
         android:id="@+id/b_submit"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
