@@ -29,7 +29,7 @@ def reports(request):
     context_dict = {}
 
     # reports
-    reports = Jobs.objects.all()
+    reports = Job.objects.all()
     context_dict['reports'] = reports
     
     return render(request, '', context_dict)
