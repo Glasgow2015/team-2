@@ -104,6 +104,7 @@ def report_submit(request):
                        accepted=jdict['accepted'],
                        latitude=jdict['latitude'],
                        longitude=jdict['longitude'],
+                       location=jdict['location'],
                        description=jdict['description'])
     except:
         # Fail
