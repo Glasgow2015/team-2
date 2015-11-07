@@ -9,4 +9,14 @@
     <string name="pick_location">Pick Location</string>
     <string name="default_location_text">Torgglen</string>
     <string name="send_report">Send Report</string>
+    <string name="signup_title">Title</string>
+    <string name="signup_fname">First Name</string>
+    <string name="signup_lname">Last Name</string>
+    <string name="signup_email">Email</string>
+    <string name="signup_phone">Contact No</string>
+    <string name="signup_location">Post Code</string>
+    <string name="signup_password">Password</string>
+    <string name="signup_skills">Skills/Interests</string>
+    <string name="signup_toptext">Enter details to register as a volunteer with Urbans Roots.  Your email and password will be used to login to the app.</string>
+
 </resources>
