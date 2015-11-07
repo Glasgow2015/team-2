@@ -4,12 +4,27 @@ from django.contrib.auth.models import User
 
 
 # Volunteer
-#class User_Volunteer(models.Model)
+class UserVolunteer(models.Model):
+
+    def __unicode__(self):
+        return self.user.username
+
+    user = models.OneToOneField(User)
+
+    # additional attributes
+    phone_number = models.CharField(max_length=15)
+
+
+# Urban Roots Admin
+class URAdmin(models.Model):
+
+    def __unicode__(self):
+        return self.user.username
 
 
 # Area Name
 class Area(models.Model):
-    name = models.CharField(max_length=128, Unique=True)
+    name = models.CharField(max_length=128, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -17,7 +32,7 @@ class Area(models.Model):
 
 # Job Category
 class Category(models.Model):
-    name = models.CharField(max_length=128, Unique=True)
+    name = models.CharField(max_length=128, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -26,8 +41,8 @@ class Category(models.Model):
 # Job instance
 class Job(models.Model):
     name = models.CharField(max_length=128)
-    created = models.DateField()
-    completed = models.DateField()
+    created = models.DateTimeField(auto_now_add=True)
+    completed = models.DateTimeField()
     accepted = models.BooleanField()
     latitude = models.DecimalField()
     longitude = models.DecimalField()
@@ -39,7 +54,7 @@ class Job(models.Model):
 
 # Volunteer Skills
 class Skills(models.Model):
-    name = models.CharField(max_length=128, Unique=True)
+    name = models.CharField(max_length=128, unique=True)
 
     def __unicode__(self):
         return self.name
