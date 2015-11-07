@@ -47,12 +47,15 @@ def volunteer_accept(request, userid):
     """ Admin accepts a volunteer application """
     context_dict = {}
     try:
-        # u = User.objects.get(id=userid)
-        v = UserVolunteer.get(id=userid)
+        u = User.objects.get(id=userid)
+        v = UserVolunteer.objects.get(user=u)
         v.accepted=True
-    except Entry.DoesNotExist:
-        return HttpResponse(404)
-    
+        v.save()
+    except User.DoesNotExist:
+        return HttpResponse(status=404)
+
+    return HttpResponse(status=200)
+
 
 def volunteer_reject(request, userid):
     """ Admin rejects a volunteer application """
@@ -162,13 +165,14 @@ def report_reject(request, reportid):
     # refresh page
     return report(request, reportid)
 
-def report(request, report_id):
+
+def report(request, reportid):
     """ Admin views a report """
     # GET
     context_dict = {}
 
     # fetch report data
-    report = Job.objects.get(id=report_id)
+    report = Job.objects.get(id=reportid)
     context_dict['report_name'] = report.name
     context_dict['report_creation_date'] = report.created
     context_dict['report_completion_date'] = report.completed
