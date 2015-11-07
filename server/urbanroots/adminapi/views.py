@@ -21,7 +21,7 @@ def index(request):
 def volunteers(request):
     """ Display list of all volunteers """
     context_dict = {}
-    volunteers = UserVolunteer.objects.all()
+    volunteers = UserVolunteer.objects.filter(accepted=False)
     context_dict['volunteers'] = volunteers
     return render(request, 'volunteers.html', context_dict)
 
@@ -47,13 +47,12 @@ def volunteer_accept(request, userid):
     """ Admin accepts a volunteer application """
     context_dict = {}
     try:
-        u = User.objects.get(id=userid)
-        v = UserVolunteer.get(user=u)
+        # u = User.objects.get(id=userid)
+        v = UserVolunteer.get(id=userid)
         v.accepted=True
     except Entry.DoesNotExist:
         return HttpResponse(404)
-
-    return volunteer(request, userid)
+    
 
 def volunteer_reject(request, userid):
     """ Admin rejects a volunteer application """
