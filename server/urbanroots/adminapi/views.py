@@ -18,10 +18,9 @@ def index(request):
 def volunteers(request):
     """ Display list of all volunteers """
     context_dict = {}
-    context_dict['volunteers'] = volunteers
     volunteers = UserVolunteer.objects.all()
-
-    return render(request, '', context_dict)
+    context_dict['volunteers'] = volunteers
+    return render(request, 'volunteers.html', context_dict)
 
 @csrf_exempt
 def volunteer_apply(request):
@@ -153,7 +152,7 @@ def report_accept(request, reportid):
     rep.accepted = True
 
     # refresh page
-    return report(request, reportid)
+    return HttpResponse(status=200)
 
 def report_reject(request, reportid):
     """ Admin rejects a report """
