@@ -5,12 +5,12 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from django.contrib.auth.models import User
+
 import json
 
-
-
-from adminapi.models import Job, UserVolunteer, JobsList
-
+from adminapi.models import Job, Area, UserVolunteer, JobsList
 
 def index(request):
     return render(request, 'index.html')
@@ -122,26 +122,26 @@ def reports(request):
 
 
 @csrf_exempt
-def report_submit(request):
+def report_submit(request, userid):
     """ User of the app submits a report """
 
     # POST
-    json_req = request.body
-    jdict = json.loads(json_req)[0]
+    json_req = str(request.body)[2:-1].replace("\\n", "")
+    jdict = json.loads(json_req)
 
     try:
         user = User.objects.get(id=userid)
         Job.objects.create(name=jdict['name'],
-                           created=jdict['created'],
-                           completed=jdict['completed'],
-                           accepted=jdict['accepted'],
-                           latitude=jdict['latitude'],
-                           longitude=jdict['longitude'],
-                           description=jdict['description'],
-                           creator=user)
+                       #created=jdict['created'],
+                       #completed=jdict['completed'],
+                       #accepted=jdict['accepted'],
+                       latitude=jdict['latitude'],
+                       longitude=jdict['longitude'],
+                       location=Area.objects.get(name=jdict['location']),
+                       description=jdict['description'],
+                       creator=user)
     except:
-        # Fail
-        return HttpResponse(status=404)
+        return HttpResponse(status=503)
         
     # OK
     return HttpResponse(status=200)
