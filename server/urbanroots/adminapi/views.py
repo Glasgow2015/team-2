@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.decorators import login_required
+from django.views.decorators.csrf import csrf_exempt
 
 from adminapi.models import Job
 
@@ -91,6 +92,7 @@ def reports(request):
     
     return render(request, '', context_dict)
 
+@csrf_exempt
 def report_submit(request):
     # POST
     json_req = request.body
