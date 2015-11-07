@@ -35,10 +35,11 @@
 {% endfor %}
 </div>
 <script>
-    function accept(id){
-    	$.get('/report/accept/', {report_id:id}, function(data){
+ function accept(id){
+    	$.get('/report/'+id+'/accept/', function(data){
          $('#questions').html(data);
         });
     }
+    // });
 </script>
 {% endblock %}

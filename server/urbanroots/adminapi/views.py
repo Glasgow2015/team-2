@@ -21,10 +21,9 @@ def index(request):
 def volunteers(request):
     """ Display list of all volunteers """
     context_dict = {}
-    context_dict['volunteers'] = volunteers
     volunteers = UserVolunteer.objects.all()
-
-    return render(request, '', context_dict)
+    context_dict['volunteers'] = volunteers
+    return render(request, 'volunteers.html', context_dict)
 
 @csrf_exempt
 def volunteer_apply(request):
@@ -154,7 +153,7 @@ def report_accept(request, reportid):
     rep.accepted = True
 
     # refresh page
-    return report(request, reportid)
+    return HttpResponse(status=200)
 
 def report_reject(request, reportid):
     """ Admin rejects a report """
@@ -165,13 +164,14 @@ def report_reject(request, reportid):
     # refresh page
     return report(request, reportid)
 
-def report(request, report_id):
+
+def report(request, reportid):
     """ Admin views a report """
     # GET
     context_dict = {}
 
     # fetch report data
-    report = Job.objects.get(id=report_id)
+    report = Job.objects.get(id=reportid)
     context_dict['report_name'] = report.name
     context_dict['report_creation_date'] = report.created
     context_dict['report_completion_date'] = report.completed
