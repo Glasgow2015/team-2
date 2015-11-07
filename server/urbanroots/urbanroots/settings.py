@@ -38,7 +38,6 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'adminapi',
-    'registration',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -109,9 +108,9 @@ STATICFILES_DIRS = (
 
 
 # Registration
-REGISTRATION_OPEN = True
-ACCOUNT_ACTIVATION_DAYS = 7
-REGISTRATION_AUTO_LOGIN = True
-LOGIN_REDIRECT_URL = '/urbanroots/'
-LOGIN_URL = '/accounts/login/'
+# REGISTRATION_OPEN = True
+# ACCOUNT_ACTIVATION_DAYS = 7
+# REGISTRATION_AUTO_LOGIN = True
+# LOGIN_REDIRECT_URL = '/urbanroots/'
+# LOGIN_URL = '/accounts/login/'
 
