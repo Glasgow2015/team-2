@@ -12,7 +12,7 @@ class UserVolunteer(models.Model):
     user = models.OneToOneField(User)
 
     # additional attributes
-    phone_number = models.CharField(max_length=15)
+    phone_number = models.CharField(max_length=15, blank=True)
 
     # relationships
     skills_list = models.ForeignKey(SkillsList, blank=True, null=True)
@@ -48,8 +48,8 @@ class Job(models.Model):
     created = models.DateTimeField(default=datetime.now, blank=True)
     completed = models.DateTimeField(blank=True)
     accepted = models.BooleanField(default=False)
-    latitude = models.DecimalField(max_digits=10, decimal_places=10)
-    longitude = models.DecimalField(max_digits=10, decimal_places=10)
+    latitude = models.DecimalField(max_digits=10, decimal_places=10, blank=True)
+    longitude = models.DecimalField(max_digits=10, decimal_places=10, blank=True)
     description = models.TextField()
 
     # Relationships
