@@ -127,7 +127,6 @@ def report_submit(request, userid):
 
     # POST
     json_req = str(request.body)[2:-1].replace("\\n", "")
-    print(json_req)
     jdict = json.loads(json_req)
 
     try:
