@@ -68,11 +68,18 @@ public class SignUpActivity extends AppCompatActivity {
                 fname.isEmpty() ||
                 lname.isEmpty() ||
                 contact.isEmpty() ||
-                location.isEmpty())
-        Toast.makeText(getApplicationContext(),"Data missing", Toast.LENGTH_LONG).show();
+                location.isEmpty()) {
+            Toast toast = Toast.makeText(getApplicationContext(), "Data missing",
+                    Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
+            toast.show();
+        }
         else {
             // Send data to server here
-            Toast.makeText(getApplicationContext(), "Registration Successfull", Toast.LENGTH_LONG).show();
+            Toast toast = Toast.makeText(getApplicationContext(), "Registration Successfull",
+                    Toast.LENGTH_LONG);
+            toast.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
+            toast.show();
             Intent intent = new Intent(this, LoginScreen.class);
             startActivity(intent);
         }
