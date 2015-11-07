@@ -6,3 +6,4 @@
 *.swp*
 *.sqlite3
 *migrations*
+*.log
