@@ -10,13 +10,23 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.JsonRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import uk.org.urbanroots.network.Requests;
 import uk.org.urbanroots.urbanroots.R;
 import uk.org.urbanroots.util.ToolbarVisualiser;
 
 public class SignUpActivity extends AppCompatActivity {
 
-    private EditText etTitle;
     private EditText etFname;
     private EditText etLname;
     private EditText etContact;
@@ -24,6 +34,7 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText etEmail;
     private EditText etPassword;
     private EditText etSkills;
+    private RequestQueue mRequestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +50,7 @@ public class SignUpActivity extends AppCompatActivity {
         etContact = (EditText) findViewById(R.id.et_phone);
         etLocation = (EditText) findViewById(R.id.et_location);
         etSkills = (EditText) findViewById(R.id.et_skills);
+        mRequestQueue = Volley.newRequestQueue(this);
     }
 
     public void submitRegistration(View view) {
@@ -68,11 +80,32 @@ public class SignUpActivity extends AppCompatActivity {
                 location.isEmpty())
         Toast.makeText(getApplicationContext(),"Data missing", Toast.LENGTH_LONG).show();
         else {
+            JSONObject jo = new JSONObject();
+            try {
+                jo.put("username", title);
+                jo.put("description", description);
+                jo.put("location", location);
+                jo.put("latitude", "0");
+                jo.put("longitude", "0");
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+            Log.w(LoginScreen.LOG_TAG, jo.toString());
+            JsonRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jo,
+                    new Response.Listener<JSONObject>() {
+                        @Override
+                        public void onResponse(JSONObject response) {
+                            Log.w(LoginScreen.LOG_TAG, response.toString());
+                        }
+                    },
+                    new Response.ErrorListener() {
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            error.printStackTrace();
+                        }
+                    });
 
-            // Send data to server here
-//            Toast.makeText(getApplicationContext(), "Registration Successfull", Toast.LENGTH_LONG).show();
-//            Intent intent = new Intent(this, LoginScreen.class);
-//            startActivity(intent);
+            mRequestQueue.add(postRequest);
         }
     }
 
