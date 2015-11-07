@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block body_block %}
+
+{%  for report in reports %}
+<div class="col-md-12">
+    <div class="col-md-3 col-md-offset-0 col-lg-3 col-lg-offset-0">
+    <p>Name :{{ report.name }}</p>
+    <p>Date submited: {{ report.date }}</p>
+    <p>Date completed{{ report.date_completed }}</p>
+    </div>
+
+   <div class="col-lg-7 col-lg-offset-3">
+       <p>{{ report.description }}</p>
+   </div>
+   <div class="col-lg-offset-10 col-lg-2">
+       <p>Accepted{{ report.accepted }}</p>
+       </div>
+</div>
+{% endblock %}
