@@ -19,6 +19,10 @@
         </activity>
         <activity android:name="uk.org.urbanroots.activities.ReportIssueActivity" >
         </activity>
+        <activity android:name="uk.org.urbanroots.activities.SignUpActivity" >
+        </activity>
+        <activity android:name="uk.org.urbanroots.activities.SignInActivity" >
+        </activity>
     </application>
 
 </manifest>
