@@ -89,3 +89,10 @@ class AreasList(models.Model):
         unique_together = ('volunteer', 'area')
 
 
+# List of jobs
+class JobsList(models.Model):
+    volunteer = models.ForeignKey(UserVolunteer, related_name='volunteer_jobs')
+    job = models.ForeignKey(Job, related_name='job')
+
+    class Meta:
+        unique_together = ('volunteer', 'job')
