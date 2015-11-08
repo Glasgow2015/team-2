@@ -14,4 +14,9 @@ public class ToolbarVisualiser {
         }
         activity.getSupportActionBar().setTitle(text);
     }
+
+    public static void visualiseToolbar(AppCompatActivity activity, String text, boolean shouldHaveBack, boolean icon) {
+        visualiseToolbar(activity, text, true);
+        activity.getSupportActionBar().setIcon(R.drawable.logo);
+    }
 }
