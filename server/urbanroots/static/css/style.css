@@ -27,6 +27,10 @@
     padding:5px;
     background-color: white;
 }
+
+.pan{
+	margin:10px;
+}
 .report,#logo:hover{
 	cursor: pointer;
 cursor: hand;
