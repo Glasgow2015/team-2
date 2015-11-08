@@ -21,11 +21,7 @@ class UserVolunteer(models.Model):
     assigned = models.BooleanField(default=False)
 
 
-<<<<<<< HEAD
-# Urban Roots Admin
-=======
 # Urban Roots Administrative user
->>>>>>> f2d05b69443917ac7b20ed0cea5a4f7601024031
 class UserOwner(models.Model):
 
     user = models.OneToOneField(User)
