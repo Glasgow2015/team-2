@@ -26,4 +26,5 @@ urlpatterns = patterns('',
                        url(r'^assign_volunteer/$', views.assign_volunteer), # for jquery assign
 
                        url(r'^login/$', views.user_login, name='login'),
+                       url(r'^logout/$', views.user_logout, name='logout'),
 )
