@@ -7,17 +7,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.core import serializers
+from adminapi.models import Job, Area, UserVolunteer, JobsList, AreasList
 
 import json
 import logging
+
 logging.basicConfig(filename='wtf.log',level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-from adminapi.models import Job, Area, UserVolunteer, JobsList, AreasList
-
-
-def index(request):
-    return render(request, 'index.html')
 
 
 def volunteers(request):
