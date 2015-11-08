@@ -5,6 +5,7 @@ urlpatterns = patterns('',
                        url(r'^$', views.index, name='index'),
 
                        url(r'^volunteer/$', views.volunteers),
+                       url(r'^current_volunteers/$', views.current_volunteers),
                        url(r'^volunteer/apply$', views.volunteer_apply),
                        url(r'^volunteer/(?P<userid>[\w\-]+)/accept/$', views.volunteer_accept),
                        url(r'^volunteer/(?P<userid>[\w\-]+)/reject/$', views.volunteer_reject),
