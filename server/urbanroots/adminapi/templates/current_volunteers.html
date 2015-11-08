@@ -3,7 +3,7 @@
 {% block body_block %}
 
 <br>
- <ul class="nav nav-pills" id="post-links">
+ <ul class="nav nav-pills col-lg-offset-3" id="post-links">
 
             <li role="presentation"  ><a href="/volunteer/">Current applications</a></li>
 
@@ -12,10 +12,10 @@
 
 
 <div id="reports bg-success">
- <h2>Volunteers</h2>
+ <h2 class="col-lg-offset-3">Volunteers</h2>
 {%  for volunteer in volunteers %}
 
-<div class="col-md-12 report" >
+<div class="col-md-12 report col-lg-offset-3" >
   <!-- <a href="{{ BASE_DIR }}/reports/{{ report.id }}" > -->
       <div class="col-md-3 col-md-offset-0 col-lg-3 col-lg-offset-0">
     <h4>{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</h4>
