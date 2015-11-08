@@ -3,6 +3,7 @@
 This app was developed for the Code For Good challenge by J.P. Morgan.
 
 Code for Good - Team 2:
+
 Kristian Sonev,              
 Craig Hamill,
 Tomasz Hippner,
