@@ -16,8 +16,12 @@ class UserVolunteer(models.Model):
     address = models.CharField(max_length=128, blank=True, null=True)
     skills = models.CharField(max_length=128, blank=True, null=True)
 
-
     accepted = models.BooleanField(default=False)
+
+    # dirty hack to pass boolean value to view
+    assigned = models.BooleanField(default=False)
+
+
     # def save(self, *args, **kwargs):
     #     super(UserProfile, self).save(*args, **kwargs)
     # relationships

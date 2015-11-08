@@ -64,6 +64,14 @@ public class SignUpActivity extends AppCompatActivity {
         final String location = tvLocation.getText().toString();
 
         String url = Requests.getInstance(getApplicationContext()).getBaseUrl() + "volunteer/apply";
+        // The toasts for successfull or failed registration attempts
+        final Toast toastSuccess = Toast.makeText(getApplicationContext(), "Registration Successful",
+                Toast.LENGTH_SHORT);
+        toastSuccess.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
+
+        final Toast toastFailed = Toast.makeText(getApplicationContext(), "Registration Failed",
+                Toast.LENGTH_SHORT);
+        toastFailed.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
 
         if (    email.isEmpty() ||
                 password.isEmpty() ||
@@ -91,18 +99,33 @@ public class SignUpActivity extends AppCompatActivity {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+
                             Log.w(LoginScreen.LOG_TAG, response.toString());
+                            try {
+                                if (response.getString("success").equals("true")) {
+                                    toastSuccess.show();
+                                    gotoHome();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            toastFailed.show();
                             error.printStackTrace();
                         }
                     });
 
             mRequestQueue.add(postRequest);
         }
+    }
+
+    public void gotoHome() {
+        Intent intent = new Intent(this, LoginScreen.class);
+        startActivity(intent);
     }
 
 }

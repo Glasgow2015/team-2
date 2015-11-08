@@ -2,9 +2,11 @@ package uk.org.urbanroots.activities;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -54,6 +56,15 @@ public class ReportIssueActivity extends AppCompatActivity {
         final String description = etDescription.getText().toString();
         final String location = tvLocation.getText().toString();
 
+        // The toasts for successfull or failed submit
+        final Toast toastSuccess = Toast.makeText(getApplicationContext(), "Report sent",
+                Toast.LENGTH_SHORT);
+        toastSuccess.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
+
+        final Toast toastFailed = Toast.makeText(getApplicationContext(), "An error occured",
+                Toast.LENGTH_SHORT);
+        toastFailed.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
+
         if (title.isEmpty() || description.isEmpty() || location.isEmpty()) {
             Toast.makeText(this, "Please complete all fields", Toast.LENGTH_LONG).show();
             return;
@@ -78,11 +89,14 @@ public class ReportIssueActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(JSONObject response) {
                         Log.w(LoginScreen.LOG_TAG, response.toString());
+                        toastSuccess.show();
+                        gotoHome();
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        toastFailed.show();
                         error.printStackTrace();
                     }
                 });
@@ -103,6 +117,10 @@ public class ReportIssueActivity extends AppCompatActivity {
 
         AlertDialog dialog = builder.create();
         dialog.show();
+    }
+    public void gotoHome() {
+        Intent intent = new Intent(this, LoginScreen.class);
+        startActivity(intent);
     }
 
     // Redundant for now
