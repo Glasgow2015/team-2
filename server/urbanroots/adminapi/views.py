@@ -74,7 +74,7 @@ def volunteer_jobs(request, userid):
         user_v = User.objects.get(id=userid)
         vol = UserVolunteer.objects.get(user=user_v)
         context_dict['jobs'] = JobsList.objects.get(volunteer=vol)
-    except Entry.DoesNotExist:
+    except User.DoesNotExist:
         return HttpResponse(404)
 
     return render(request, '', context_dict)
@@ -87,7 +87,7 @@ def volunteer_assign(request, userid, jobid):
         job_v = Job.objects.get(id=jobid)
         JobsList.objects.get_or_create(volunteer=vol,
                                        job=job_v)
-    except Entry.DoesNotExist:
+    except User.DoesNotExist:
         return HttpResponse(404)
 
     return volunteer(request, userid)
@@ -104,7 +104,7 @@ def volunteer(request, userid):
         context_dict['first_name'] = user_v.first_name
         context_dict['last_name'] = user_v.last_name
 
-    except Entry.DoesNotExist:
+    except User.DoesNotExist:
         return HttpResponse(404)
 
     return render(request, '', context_dict)
@@ -232,7 +232,7 @@ def job_accept(request, jobid):
         job = Job.objects.get(id=jobid)
         job.accepted=True
         job.save()
-    except Entry.DoesNotExist:
+    except Job.DoesNotExist:
         return HttpResponse(status=404)
 
     return HttpResponse(status=200)
@@ -242,7 +242,7 @@ def job_reject(request, jobid):
     try:
         job = Job.objects.get(id=jobid)
         job.delete()
-    except Entry.DoesNotExist:
+    except Job.DoesNotExist:
         return HttpResponse(status=404)
 
     return HttpResponse(status=200)
