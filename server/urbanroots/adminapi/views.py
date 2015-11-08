@@ -178,6 +178,7 @@ def report(request, reportid):
     context_dict['report'] = Job.objects.get(id=reportid)
     context_dict['volunteers'] = UserVolunteer.objects.all()
     context_dict['arealist'] = AreasList.objects.all()
+    context_dict['job'] = Job.objects.get(id=reportid)
 
     return render(request, 'report.html', context_dict)
 
@@ -188,7 +189,7 @@ def job(request, jobid):
     context_dict = {}
     
     # fetch report data
-    report = Job.objects.get(id=report_id)
+    report = Job.objects.get(id=jobid)
     context_dict['report_name'] = report.name
     context_dict['report_creation_date'] = report.created
     context_dict['report_completion_date'] = report.completed
