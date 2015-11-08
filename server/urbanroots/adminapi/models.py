@@ -31,6 +31,7 @@ class UserOwner(models.Model):
 
     user = models.OneToOneField(User)
 
+
     def __unicode__(self):
         return self.user.username
 
