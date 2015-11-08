@@ -76,17 +76,17 @@ def volunteer_reject(request, userid):
 
 def volunteer_jobs(request, userid):
     """ Inspect a user's jobs list """
-    context_dict = {}
 
     try:
         user_v = User.objects.get(id=userid)
         vol = UserVolunteer.objects.get(user=user_v)
-        context_dict['jobs'] = JobsList.objects.get(volunteer=vol)
+        jobs_list = JobsList.objects.get(volunteer=vol)
+        jobs = [j.job for j in jobs_list]
+        
     except User.DoesNotExist:
         return HttpResponse(404)
 
-    #return render(request, '', context_dict)
-    return 
+    return HttpResponse(json.dumps(jobs))
 
 @csrf_exempt
 def volunteer_assign(request, userid, jobid):
