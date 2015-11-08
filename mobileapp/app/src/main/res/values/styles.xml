@@ -19,7 +19,16 @@
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
     <style name="AppTheme.AccentButton" parent="Base.Widget.AppCompat.Button">
-        <item name="android:background">@color/colorAccent</item>
+        <item name="android:background">@drawable/accent_button</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="AppTheme.LightColor" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@drawable/light_button</item>
+    </style>
+
+    <style name="AppTheme.ButterflyColor" parent="Base.Widget.AppCompat.Button">
+        <item name="android:background">@drawable/butterfly_button</item>
     </style>
 </resources>
 
