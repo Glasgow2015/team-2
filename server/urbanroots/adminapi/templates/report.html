@@ -7,17 +7,17 @@
 	<div class="container">		
 				<div class="col-md-12">
 					
-					<div class="col-md-4">
-						<div class="panel panel-primary">
-			<div class="panel-body beer-content">
-						<h2>{{ report.name }}</h2>
+					<div class="col-md-6">
+						
+			<div class="card">
+						<h3>{{ report.name }}</h3>
 						<br>
 						<div class="row">
 							<div class="col-md-3">
 								<p>Description</p>
 							</div>
 							
-							<div class="col-md-7">
+							<div class="col-md-8">
 								<p>{{ report.description }}</p>
 							</div>	
 						</div>
@@ -27,7 +27,7 @@
 								<p>Location</p>
 							</div>
 							
-							<div class="col-md-7">
+							<div class="col-md-8">
 								<p>{{ report.location }}</p>						
 							</div>	
 						</div>
@@ -37,7 +37,7 @@
 								<p>Latitude</p>
 							</div>
 							
-							<div class="col-md-7">
+							<div class="col-md-8">
 								<p>{{ report.latitude }}</p>						
 							</div>	
 						</div>
@@ -47,27 +47,26 @@
 								<p>Longitude</p>
 							</div>
 							
-							<div class="col-md-7">
+							<div class="col-md-8">
 								<p>{{ report.longitude }}</p>						
 							</div>	
 						</div>				
 						
 						
-					</div>
+					
 				</div>	
 			</div>
 			
 			<div class="col-md-5" id="locvolunteerlist">
-				<h3> Local Volunteers</h2>
+				<h3 align="center"> Local Volunteers</h2>
 				<br>
 				{% for volunteer in volunteers %}
-					<div class="panel panel-primary">
-						<div class="panel-body beer-content">
+					<div class="pan card">
+						<div class="panel-body">
 							<div class="col-md-9">
 							
 								<p>{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</p>
-								<p>Skills: {{ volunteer.skills }}</p>
-								<p>Assigned: {{ volunteer.assigned }}</p>
+								<p>Skills: {{ volunteer.skills }}</p>								
 								<p>Area: 
 								
 								{% for area in arealist %}
