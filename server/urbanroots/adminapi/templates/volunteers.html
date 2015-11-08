@@ -4,7 +4,7 @@
 
 <br>
  <ul class="nav nav-pills" id="post-links">
-            <li role="presentation" class="active" ><a href="/volunteers">Current applications</a></li>
+            <li role="presentation" class="active" ><a href="/volunteer/">Current applications</a></li>
             <li role="presentation" ><a href="/current_volunteers">Registered Volunteers</a></li>
 </ul>
 
@@ -35,7 +35,7 @@
        {% if not volunteer.accepted  %}
        
        <button class="btn  acpt_btn" onclick="accept({{ volunteer.user.id }})">Accept</button>
-       <button class="btn  acpt_btn" onclick="decline({{ volunteer.user.id }})">Decline</button>
+       <button class="btn  acpt_btn" onclick="reject({{ volunteer.user.id }})">Decline</button>
        {% endif %}
        </div>
 </div>
@@ -50,7 +50,7 @@
     }
 
     function reject(id){
-      $.get('/volunteer/'+id+'/reject, function(data){
+      $.get('/volunteer/'+id+'/reject', function(data){
          // $('#questions').html(data);
         });
     }
