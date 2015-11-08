@@ -3,7 +3,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 
 
-# Volunteer
+# Volunteer User reporting or being assigned to jobs
 class UserVolunteer(models.Model):
 
     def __unicode__(self):
@@ -15,22 +15,13 @@ class UserVolunteer(models.Model):
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     address = models.CharField(max_length=128, blank=True, null=True)
     skills = models.CharField(max_length=128, blank=True, null=True)
-
     accepted = models.BooleanField(default=False)
 
-    # dirty hack to pass boolean value to view
+    # used pass boolean value to view
     assigned = models.BooleanField(default=False)
 
 
-    # def save(self, *args, **kwargs):
-    #     super(UserProfile, self).save(*args, **kwargs)
-    # relationships
-    # don't uncomment!
-    # skills_list = models.ForeignKey(SkillsList, blank=True, null=True)
-    # areas_list = models.ForeignKey(AreasList)
-
-
-# Urban Roots Admin
+# Urban Roots Administrative user
 class UserOwner(models.Model):
 
     user = models.OneToOneField(User)
@@ -39,7 +30,7 @@ class UserOwner(models.Model):
         return self.user.username
 
 
-# Area Name
+# General location for jobs
 class Area(models.Model):
     name = models.CharField(max_length=128, unique=True)
 
@@ -55,7 +46,7 @@ class Category(models.Model):
         return self.name
 
 
-# Job instance
+# Represents a job in the system reported by app users and managed by administration
 class Job(models.Model):
     name = models.CharField(max_length=128)
     created = models.DateTimeField(default=datetime.now, blank=True, null=True)
@@ -66,7 +57,7 @@ class Job(models.Model):
     description = models.TextField()
     location = models.ForeignKey(Area, null=True) # this probably shouldn't be null
 
-    # Relationships
+    # Relationships **************************
     creator = models.ForeignKey(User, blank=True, null=True)
 
     def __unicode__(self):
@@ -81,7 +72,7 @@ class Skill(models.Model):
         return self.name
 
 
-# Intersecting Entities to resolve Many to Many rels
+# Intersecting Entities to resolve Many to Many relationships *************************************
 
 # List of Skills for Volunteers
 class SkillsList(models.Model):

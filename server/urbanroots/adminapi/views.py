@@ -295,18 +295,16 @@ def job_reject(request, jobid):
 
 @login_required
 def assign_volunteer(request):
-    # assigns or unassigns volunteer ot a job
-    # jquery
+    # assigns or un assigns a volunteer ot a job
+    # called by jquery
 
+    # response for ajax
     ajax_response = "Failure"
 
     if request.method == 'GET':
 
         volunteer_id = request.GET['volunteer_id']
         job_id = request.GET['job_id']
-
-
-        
 
         this_volunteer = UserVolunteer.objects.get(id=volunteer_id)
 
@@ -323,3 +321,5 @@ def assign_volunteer(request):
             ajax_response = "Success"
 
     return HttpResponse(ajax_response)
+
+
