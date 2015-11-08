@@ -260,7 +260,7 @@ def job_reject(request, jobid):
 
 
 def assign_volunteer(request):
-    # assigns volunteer ot a job
+    # assigns or unassigns volunteer ot a job
     # jquery
 
     ajax_response = "Failure"
@@ -277,6 +277,10 @@ def assign_volunteer(request):
             this_job_list_item = JobsList.objects.create(volunteer=this_volunteer, job=this_job)
             this_job_list_item.save()
 
+            ajax_response = "Success"
+
+        else:
+            JobsList.objects.filter(volunteer=this_volunteer, job=this_job).delete()
             ajax_response = "Success"
 
     return HttpResponse(ajax_response)
