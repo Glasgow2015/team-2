@@ -59,8 +59,27 @@
 				<br>
 				{% for volunteer in volunteers %}
 					<div class="panel panel-primary">
-						<p>{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</p>
-						<p>Skills: {{ volunteer.skills }}</p>
+						<div class="panel-body beer-content">
+							<p>{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</p>
+							<p>Skills: {{ volunteer.skills }}</p>
+							<p>Area: 
+							
+							{% for area in arealist %}
+								{% ifequal volunteer.user.username area.volunteer.user.username %}
+							
+								{{ area.area }}
+								
+								{% endifequal %}
+							{% endfor %}
+							
+							
+							
+							
+							
+							
+							
+							</p>
+						</div>
 					</div>
 					
 				
