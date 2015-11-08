@@ -1,7 +1,6 @@
 package uk.org.urbanroots.activities;
 
 import android.app.AlertDialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,17 +17,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
 import com.android.volley.toolbox.Volley;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.common.api.GoogleApiClient.ConnectionCallbacks;
-import com.google.android.gms.common.api.GoogleApiClient.OnConnectionFailedListener;
-import com.google.android.gms.location.LocationServices;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import uk.org.urbanroots.network.Requests;
 import uk.org.urbanroots.urbanroots.R;
@@ -67,7 +59,7 @@ public class ReportIssueActivity extends AppCompatActivity {
             return;
         }
 
-        String url = Requests.getInstance().getBaseUrl() + "report/submit/2";
+        String url = Requests.getInstance(getApplicationContext()).getBaseUrl() + "report/submit/2";
         Log.w(LoginScreen.LOG_TAG, url);
 
         JSONObject jo = new JSONObject();

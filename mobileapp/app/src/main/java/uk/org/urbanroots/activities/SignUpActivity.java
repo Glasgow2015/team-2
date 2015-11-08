@@ -63,7 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
         final String contact = etContact.getText().toString();
         final String location = tvLocation.getText().toString();
 
-        String url = Requests.getInstance().getBaseUrl() + "volunteer/apply";
+        String url = Requests.getInstance(getApplicationContext()).getBaseUrl() + "volunteer/apply";
 
         if (    email.isEmpty() ||
                 password.isEmpty() ||

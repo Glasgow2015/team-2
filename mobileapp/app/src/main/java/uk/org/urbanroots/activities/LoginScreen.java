@@ -34,4 +34,6 @@ public class LoginScreen extends AppCompatActivity {
         Intent intent = new Intent(this, SignInActivity.class);
         startActivity(intent);
     }
+
+
 }
