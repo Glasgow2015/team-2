@@ -25,6 +25,13 @@ def volunteers(request):
     context_dict['volunteers'] = volunteers
     return render(request, 'volunteers.html', context_dict)
 
+def current_volunteers(request):
+    """ Display list of all volunteers """
+    context_dict = {}
+    volunteers = UserVolunteer.objects.filter(accepted=True)
+    context_dict['volunteers'] = volunteers
+    return render(request, 'current_volunteers.html', context_dict)
+
 @csrf_exempt
 def volunteer_apply(request):
     """ Records a new volunteer """
