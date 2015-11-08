@@ -20,10 +20,19 @@
             </intent-filter>
         </activity>
         <activity android:name="uk.org.urbanroots.activities.ReportIssueActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.org.urbanroots.activities.LoginScreen" />
         </activity>
         <activity android:name="uk.org.urbanroots.activities.SignUpActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.org.urbanroots.activities.LoginScreen" />
         </activity>
         <activity android:name="uk.org.urbanroots.activities.SignInActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="uk.org.urbanroots.activities.LoginScreen" />
         </activity>
     </application>
 
