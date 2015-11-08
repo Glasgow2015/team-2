@@ -26,12 +26,12 @@
     <![endif]-->
 
 </head>
-<body>
+<body id="body">
 
 {% load staticfiles %}
 {% csrf_token %}
 
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="header">
     <div class="container-fluid">
 
         <div class="navbar-header">
@@ -73,7 +73,7 @@
 {% endblock %}
 </div> -->
     </div>
-<div id="centre_block" class="col-md-9">
+<div id="centre_block" class="col-lg-8 col-md-8 col-lg-offset-2">
 
     {% block body_block %}{% endblock %}
 
