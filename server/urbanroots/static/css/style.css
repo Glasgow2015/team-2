@@ -2,7 +2,7 @@
 
 #body{
 	margin-top:50px;
-	background-color: white;
+	background-color: #E8E8E8;
 }
 .report{
 	margin:5px;
@@ -18,4 +18,10 @@
 .acpt_btn{
 	background-color: #795548;
 	color:white;
+}
+.selected{
+	background-color: #003300;
+	border-radius:5px;
+	color:white;
+	text-decoration: none;
 }
