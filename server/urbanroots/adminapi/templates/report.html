@@ -67,7 +67,7 @@
 							{% for area in arealist %}
 								{% ifequal volunteer.user.username area.volunteer.user.username %}
 							
-								{{ area.area }}
+								{{ area.area.name }}
 								
 								{% endifequal %}
 							{% endfor %}
