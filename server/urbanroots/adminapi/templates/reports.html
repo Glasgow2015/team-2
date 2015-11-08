@@ -2,14 +2,14 @@
 
 {% block body_block %}
 
-
+<!-- page displays reports ordered by date desc-->
     
 <div id="reports bg-success" >
  <h2 class="col-lg-offset-3">Reports</h2>
 {%  for report in reports %}
-
+<!-- display details of each report-->
 <div class="col-md-12 report col-lg-offset-3" >
-
+   <!--when report is clicked open report in report page-->
    <div class="col-md-3 col-md-offset-0 col-lg-3 col-lg-offset-0" onclick="location.href='{{ BASE_DIR }}/report/{{ report.id }}'">
     <h4>{{ report.name }}</h4>
     <br>
@@ -36,6 +36,7 @@
 
 {% endfor %}
 </div>
+<!-- functions accept or reject reports when appropriate button is clicked-->
 <script>
  function accept(id){
     	$.get('/report/'+id+'/accept/', function(data){
@@ -49,6 +50,5 @@
          location.reload();
         });
     }
-    // });
 </script>
 {% endblock %}

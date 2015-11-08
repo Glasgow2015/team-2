@@ -13,10 +13,10 @@
 
 <div id="reports bg-success">
  <h2 class="col-lg-offset-3">Volunteers</h2>
+  <!-- display details of volunteers -->
 {%  for volunteer in volunteers %}
 
 <div class="col-md-12 report col-lg-offset-3" >
-  <!-- <a href="{{ BASE_DIR }}/reports/{{ report.id }}" > -->
       <div class="col-md-3 col-md-offset-0 col-lg-3 col-lg-offset-0">
     <h4>{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</h4>
     <p>Phone: {{ volunteer.phone_number }}</p>
@@ -33,18 +33,7 @@
     {% endif %}
     </div>
 
-   <!-- <div class="col-lg-6 col-lg-offset-1">
-       <p>{{ volunteer.address }}</p>
-   </div> -->
-   <!-- </a> -->
-   <div class="col-lg-offset-9 col-lg-4">
-       {% if not volunteer.accepted  %}
-       
-       <button class="btn  acpt_btn" onclick="accept({{ volunteer.id }})">Accept</button>
-       <button class="btn  acpt_btn" onclick="decline({{ volunteer.id }})">Decline</button>
-       {% endif %}
-       </div>
-</div>
+  </div>
 
 {% endfor %}
 </div>
