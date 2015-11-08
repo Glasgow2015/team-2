@@ -21,7 +21,6 @@ class UserVolunteer(models.Model):
     assigned = models.BooleanField(default=False)
 
 
-
 # Urban Roots Administrative user
 class UserOwner(models.Model):
 

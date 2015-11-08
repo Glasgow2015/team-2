@@ -27,8 +27,9 @@
         <item name="android:background">@drawable/light_button</item>
     </style>
 
-    <style name="AppTheme.ButterflyColor" parent="Base.Widget.AppCompat.Button">
-        <item name="android:background">@drawable/butterfly_button</item>
+    <style name="AppTheme.CardButton" parent="Base.Widget.AppCompat.Button.Borderless">
+        <item name="android:background">@drawable/card_button</item>
+        <item name="android:textColor">@android:color/holo_blue_light</item>
     </style>
 </resources>
 

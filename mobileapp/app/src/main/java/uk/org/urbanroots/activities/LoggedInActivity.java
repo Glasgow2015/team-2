@@ -37,14 +37,6 @@ public class LoggedInActivity extends AppCompatActivity implements TaskPollObser
     private RecyclerView mRecyclerView;
     private TaskAdapter mTaskAdapter;
 
-
-    private final Task [] mockTasks = {
-        new Task("description 1", "Title 2", "Location  3"),
-            new Task("description 2", "Title 3", "Location 5"),
-            new Task("description 2", "Title 3", "Location 5"),
-            new Task("description 2", "Title 3", "Location 5")
-    };
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

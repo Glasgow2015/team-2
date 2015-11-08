@@ -18,5 +18,7 @@
     <string name="signup_password">Password</string>
     <string name="signup_skills">Skills/Interests (Optional)</string>
     <string name="signup_toptext">Enter details to register as a volunteer with Urbans Roots.  Your email and password will be used to login to the app.</string>
+    <string name="card_accept_button">Accept</string>
+    <string name="card_decline_button">Decline</string>
 
 </resources>

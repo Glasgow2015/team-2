@@ -35,7 +35,6 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText tvLocation;
     private EditText etEmail;
     private EditText etPassword;
-//    private EditText etSkills;
     private RequestQueue mRequestQueue;
 
     @Override
@@ -51,7 +50,6 @@ public class SignUpActivity extends AppCompatActivity {
         etLname = (EditText) findViewById(R.id.et_lname);
         etContact = (EditText) findViewById(R.id.et_phone);
         tvLocation = (EditText) findViewById(R.id.tv_location);
-//        etSkills = (EditText) findViewById(R.id.et_skills);
         mRequestQueue = Volley.newRequestQueue(this);
     }
 
@@ -67,11 +65,9 @@ public class SignUpActivity extends AppCompatActivity {
         // The toasts for successfull or failed registration attempts
         final Toast toastSuccess = Toast.makeText(getApplicationContext(), "Registration Successful",
                 Toast.LENGTH_SHORT);
-        toastSuccess.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
 
         final Toast toastFailed = Toast.makeText(getApplicationContext(), "Registration Failed",
                 Toast.LENGTH_SHORT);
-        toastFailed.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
 
         if (    email.isEmpty() ||
                 password.isEmpty() ||
@@ -81,7 +77,6 @@ public class SignUpActivity extends AppCompatActivity {
                 location.isEmpty()) {
             Toast toast = Toast.makeText(getApplicationContext(), "Data missing",
                     Toast.LENGTH_LONG);
-            toast.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
             toast.show();
         }
         else {
@@ -99,8 +94,6 @@ public class SignUpActivity extends AppCompatActivity {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
-
-                            Log.w(LoginScreen.LOG_TAG, response.toString());
                             try {
                                 if (response.getString("success").equals("true")) {
                                     toastSuccess.show();
@@ -124,8 +117,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void gotoHome() {
-        Intent intent = new Intent(this, LoginScreen.class);
-        startActivity(intent);
+        this.finish();
     }
 
 }

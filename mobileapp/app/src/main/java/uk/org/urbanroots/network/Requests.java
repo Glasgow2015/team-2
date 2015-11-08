@@ -70,7 +70,6 @@ public final class Requests {
     }
 
     public void pollAreThereNewTasks() {
-        Log.w(LoginScreen.LOG_TAG, "are we here?");
         String url = getBaseUrl() + "volunteer/2/jobs";
         JsonRequest getRequest = new JsonObjectRequest(Request.Method.GET, url,
                 new Response.Listener<JSONObject>() {
@@ -104,8 +103,11 @@ public final class Requests {
         NotificationCompat.Builder mBuilder =
                new NotificationCompat.Builder(mContext)
                         .setSmallIcon(R.drawable.logo)
-                        .setContentTitle("")
-                        .setContentText("Hello World!");
+                        .setContentTitle("Urban Roots")
+                        .setAutoCancel(true)
+                        .setGroup(LoginScreen.TASK_NOTIFICATION_GROUP)
+                        .setGroupSummary(true)
+                        .setContentText("You have been invited to a volunteering event!");
 
         Intent resultIntent = new Intent(mContext, LoggedInActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(mContext);

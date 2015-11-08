@@ -7,17 +7,13 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib.auth.models import User
 from django.core import serializers
+from adminapi.models import Job, Area, UserVolunteer, JobsList, AreasList
 
 import json
 import logging
+
 logging.basicConfig(filename='wtf.log',level=logging.INFO)
 logger = logging.getLogger(__name__)
-
-from adminapi.models import Job, Area, UserVolunteer, JobsList, AreasList
-
-
-def index(request):
-    return render(request, 'index.html')
 
 
 def volunteers(request):
@@ -138,24 +134,6 @@ def volunteer_assign(request, userid, jobid):
 
     return HttpResponse(status=200)
 
-
-#def volunteer(request, userid):
-#    """ View a volunteer's profile """
-#    context_dict = {}
-#
-#    try:
-#        user_v = User.objects.get(id=userid)
-#        volunteer = UserVolunteer.objects.get(user=user_v)
-#        context_dict['phone_number'] = volunteer.phone_number
-#        context_dict['username'] = user_v.username
-#        context_dict['first_name'] = user_v.first_name
-#        context_dict['last_name'] = user_v.last_name
-#
-#    except User.DoesNotExist:
-#        return HttpResponse(404)
-#
-#    return render(request, '', context_dict)
-
         
 def reports(request):
     """ View a list of all reports """
@@ -181,9 +159,6 @@ def report_submit(request, userid):
     user = User.objects.get(id=userid)
     # enter new report into DB
     Job.objects.create(name=jdict['name'],
-                       #created=jdict['created'],
-                       #completed=jdict['completed'],
-                       #accepted=jdict['accepted'],
                        latitude=jdict['latitude'],
                        longitude=jdict['longitude'],
                        location=Area.objects.get(name=jdict['location']),
