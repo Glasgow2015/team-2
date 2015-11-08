@@ -185,11 +185,20 @@ def report(request, reportid):
     context_dict = {}
 
     # fetch report data
-    context_dict['report'] = Job.objects.get(id=reportid)
-    context_dict['volunteers'] = UserVolunteer.objects.all()
+
+    this_job = Job.objects.get(id=reportid)
+    this_volunteers = UserVolunteer.objects.all()
+    this_job_list = JobsList.objects.all()
+
+    for this_volunteer in this_volunteers:
+        for job_list_item in this_job_list:
+            if job_list_item.volunteer.id == this_volunteer.id:
+                this_volunteer.assigned = True
+
+    context_dict['report'] = this_job
+    context_dict['volunteers'] = this_volunteers
     context_dict['arealist'] = AreasList.objects.all()
-    context_dict['job'] = Job.objects.get(id=reportid)
-    context_dict['joblist'] = JobsList.objects.all()
+    # context_dict['job'] = Job.objects.get(id=reportid) duplicate od report?
 
     return render(request, 'report.html', context_dict)
 

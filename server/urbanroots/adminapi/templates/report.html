@@ -67,7 +67,7 @@
 							
 								<p>{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</p>
 								<p>Skills: {{ volunteer.skills }}</p>
-								<p>ID: {{ volunteer.id }}</p>
+								<p>Assigned: {{ volunteer.assigned }}</p>
 								<p>Area: 
 								
 								{% for area in arealist %}
@@ -83,7 +83,11 @@
 								<button id="{{ volunteer.id }}" class="btn acpt_btn" 
 								onclick="assign({{ volunteer.id }}, {{ report.id }})">
 								
-								Assign
+								{% if volunteer.assigned == True %}
+									Unassign
+								{% else %}
+									Assign
+								{% endif %}
 								</button>
 							</div>			
 							
@@ -102,10 +106,12 @@
 <script>
 	function assign(vol_id, job_id){	
 		// assign volunteer to a job
-		
+		var button = $('#' + vol_id);
+		if(button.text() == "Assign") button.text("Unassign");
+		else button.text("Assign");
 		
 		$.get('/assign_volunteer/', {volunteer_id: vol_id, job_id: job_id})
-        location.reload();
+        //window.location.reload(true);
 	}
 	
 	
