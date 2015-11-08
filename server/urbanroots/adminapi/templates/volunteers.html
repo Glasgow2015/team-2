@@ -49,8 +49,8 @@
         });
     }
 
-    function accept(id){
-      $.get('/volunteer/'+id+'/decline', function(data){
+    function reject(id){
+      $.get('/volunteer/'+id+'/reject, function(data){
          // $('#questions').html(data);
         });
     }
