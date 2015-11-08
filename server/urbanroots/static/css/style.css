@@ -3,6 +3,7 @@
 #body{
 	margin-top:50px;
 	background-color: #E8E8E8;
+	padding-bottom: 50px;
 }
 
 #login_container{
@@ -14,6 +15,10 @@
     box-shadow: 3px 3px 3px 3px gray;
     padding:5px;
     background-color: white;
+}
+.report:hover{
+	cursor: pointer;
+cursor: hand;
 }
 
 #header{
