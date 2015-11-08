@@ -17,16 +17,16 @@
         android:layout_below="@+id/app_bar"
         android:layout_centerHorizontal="true">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
             <EditText
                 android:id="@+id/et_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:width="300dp"
                 android:hint="@string/signup_email"
                 android:inputType="textEmailAddress" />
@@ -35,22 +35,25 @@
                 android:id="@+id/et_password"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/et_email"
-                android:layout_alignStart="@+id/et_email"
-                android:layout_below="@+id/et_email"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:width="300dp"
                 android:hint="@string/signup_password"
+                android:inputType="textPassword" />
+
+            <EditText
+                android:id="@+id/et_password_repeat"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:width="300dp"
+                android:hint="Repeat Password"
                 android:inputType="textPassword" />
 
             <EditText
                 android:id="@+id/et_fname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/et_password"
-                android:layout_alignStart="@+id/et_password"
-                android:layout_below="@+id/et_password"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:width="300dp"
                 android:hint="@string/signup_fname" />
 
@@ -58,61 +61,37 @@
                 android:id="@+id/et_lname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/et_fname"
-                android:layout_alignStart="@+id/et_fname"
-                android:layout_below="@+id/et_fname"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:width="300dp"
                 android:hint="@string/signup_lname" />
-
 
             <EditText
                 android:id="@+id/et_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/et_lname"
-                android:layout_alignStart="@+id/et_lname"
-                android:layout_below="@+id/et_lname"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:width="300dp"
                 android:hint="@string/signup_phone"
                 android:inputType="phone" />
 
             <EditText
-                android:id="@+id/et_location"
+                android:inputType="textMultiLine"
+                android:id="@+id/tv_location"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/et_phone"
-                android:layout_alignStart="@+id/et_phone"
-                android:layout_below="@+id/et_phone"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="16dp"
                 android:width="300dp"
                 android:hint="@string/signup_location" />
 
-            <EditText
-                android:id="@+id/et_skills"
-                android:layout_width="wrap_content"
+            <Button
+                android:id="@+id/b_submit"
+                android:layout_width="300dp"
                 android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/et_location"
-                android:layout_alignStart="@+id/et_location"
-                android:layout_below="@+id/et_location"
                 android:layout_marginTop="20dp"
-                android:width="300dp"
-                android:hint="@string/signup_skills" />
-
-
-        </RelativeLayout>
+                android:onClick="submitRegistration"
+                android:text="Submit"
+                android:layout_gravity="center_horizontal"/>
+        </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/b_submit"
-        android:layout_width="150dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:layout_below="@+id/scrollView"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:layout_marginTop="20dp"
-        android:onClick="submitRegistration"
-        android:text="Submit" />
 </RelativeLayout>

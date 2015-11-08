@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -20,6 +21,7 @@ import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.w3c.dom.Text;
 
 import uk.org.urbanroots.network.Requests;
 import uk.org.urbanroots.urbanroots.R;
@@ -30,10 +32,10 @@ public class SignUpActivity extends AppCompatActivity {
     private EditText etFname;
     private EditText etLname;
     private EditText etContact;
-    private EditText etLocation;
+    private EditText tvLocation;
     private EditText etEmail;
     private EditText etPassword;
-    private EditText etSkills;
+//    private EditText etSkills;
     private RequestQueue mRequestQueue;
 
     @Override
@@ -48,8 +50,8 @@ public class SignUpActivity extends AppCompatActivity {
         etFname = (EditText) findViewById(R.id.et_fname);
         etLname = (EditText) findViewById(R.id.et_lname);
         etContact = (EditText) findViewById(R.id.et_phone);
-        etLocation = (EditText) findViewById(R.id.et_location);
-        etSkills = (EditText) findViewById(R.id.et_skills);
+        tvLocation = (EditText) findViewById(R.id.tv_location);
+//        etSkills = (EditText) findViewById(R.id.et_skills);
         mRequestQueue = Volley.newRequestQueue(this);
     }
 
@@ -59,16 +61,7 @@ public class SignUpActivity extends AppCompatActivity {
         final String fname = etFname.getText().toString();
         final String lname = etLname.getText().toString();
         final String contact = etContact.getText().toString();
-        final String location = etLocation.getText().toString();
-        final String skills = etSkills.getText().toString();
-
-        Log.d(LoginScreen.LOG_TAG, email);
-        Log.d(LoginScreen.LOG_TAG, password);
-        Log.d(LoginScreen.LOG_TAG, fname);
-        Log.d(LoginScreen.LOG_TAG, lname);
-        Log.d(LoginScreen.LOG_TAG, contact);
-        Log.d(LoginScreen.LOG_TAG, location);
-        Log.d(LoginScreen.LOG_TAG, skills);
+        final String location = tvLocation.getText().toString();
 
         String url = Requests.getInstance().getBaseUrl() + "volunteer/apply";
 
@@ -86,15 +79,14 @@ public class SignUpActivity extends AppCompatActivity {
         else {
             JSONObject jo = new JSONObject();
             try {
-                jo.put("username", title);
-                jo.put("description", description);
-                jo.put("location", location);
-                jo.put("latitude", "0");
-                jo.put("longitude", "0");
+                jo.put("username", email);
+                jo.put("first_name", fname);
+                jo.put("last_name", lname);
+                jo.put("phone_number", contact);
+                jo.put("password", password);
             } catch (JSONException e) {
                 e.printStackTrace();
             }
-            Log.w(LoginScreen.LOG_TAG, jo.toString());
             JsonRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jo,
                     new Response.Listener<JSONObject>() {
                         @Override

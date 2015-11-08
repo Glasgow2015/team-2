@@ -2,19 +2,74 @@
 
 {% block body_block %}
 
-{%  for report in reports %}
-<div class="col-md-12">
-    <div class="col-md-3 col-md-offset-0 col-lg-3 col-lg-offset-0">
-    <p>Name :{{ report.name }}</p>
-    <p>Date submited: {{ report.date }}</p>
-    <p>Date completed{{ report.date_completed }}</p>
-    </div>
-
-   <div class="col-lg-7 col-lg-offset-3">
-       <p>{{ report.description }}</p>
-   </div>
-   <div class="col-lg-offset-10 col-lg-2">
-       <p>Accepted{{ report.accepted }}</p>
-       </div>
-</div>
+	<br><br><br>
+	
+	<div class="container">
+		<div class="col-md-12">
+			<div class="col-md-4">
+				<h2>{{ report.name }}</h2>
+				<br>
+				<div class="row">
+					<div class="col-md-3">
+						<p>Description</p>
+					</div>
+					
+					<div class="col-md-7">
+						<p>{{ report.description }}</p>
+					</div>	
+				</div>
+				
+				<div class="row">
+					<div class="col-md-3">
+						<p>Location</p>
+					</div>
+					
+					<div class="col-md-7">
+						<p>{{ report.location }}</p>						
+					</div>	
+				</div>
+				
+				<div class="row">
+					<div class="col-md-3">
+						<p>Latitude</p>
+					</div>
+					
+					<div class="col-md-7">
+						<p>{{ report.latitude }}</p>						
+					</div>	
+				</div>
+				
+				<div class="row">
+					<div class="col-md-3">
+						<p>Longitude</p>
+					</div>
+					
+					<div class="col-md-7">
+						<p>{{ report.longitude }}</p>						
+					</div>	
+				</div>				
+				
+				
+			</div>
+			
+			
+			
+			<div class="col-md-4">
+				<h3> Local Volunteers</h2>
+				<br>
+				{% for volunteer in volunteers %}
+					<div class="panel panel-primary">
+						<p>{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</p>
+						<p>Skills: {{ volunteer.skills }}</p>
+					</div>
+					
+				
+				{% endfor %}
+				
+			
+			</div>
+		</div>
+	</div>
+	
+	
 {% endblock %}

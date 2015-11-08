@@ -46,7 +46,6 @@
         android:id="@+id/tv_chosen_location"
         android:text="@string/default_location_text"
         android:textSize="25sp"
-        android:layout_below="@+id/b_pick_location"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" />
 

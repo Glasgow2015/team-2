@@ -147,15 +147,18 @@ def report_submit(request, userid):
     # OK
     return HttpResponse(json.dumps({'success': 'true'}))
 
+@csrf_exempt
 def report_accept(request, reportid):
     """ Admin accepts a report """
     # mark report as accepted
     rep = Job.objects.get(id=reportid)
     rep.accepted = True
+    rep.save()
 
     # refresh page
     return HttpResponse(status=200)
 
+@csrf_exempt
 def report_reject(request, reportid):
     """ Admin rejects a report """
     # delete report alltogether
@@ -172,16 +175,10 @@ def report(request, reportid):
     context_dict = {}
 
     # fetch report data
-    report = Job.objects.get(id=reportid)
-    context_dict['report_name'] = report.name
-    context_dict['report_creation_date'] = report.created
-    context_dict['report_completion_date'] = report.completed
-    context_dict['report_accepted'] = report.accepted
-    context_dict['report_latitude'] = report.latitude
-    context_dict['report_longitude'] = report.longitude
-    context_dict['report_description'] = report.description
+    context_dict['report'] = Job.objects.get(id=reportid)
+    context_dict['volunteers'] = UserVolunteer.objects.all()
 
-    return render(request, '', context_dict)
+    return render(request, 'report.html', context_dict)
 
 @csrf_exempt
 def job(request, jobid):
