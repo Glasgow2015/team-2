@@ -13,6 +13,7 @@
 
 #header{
 	background-color:#4CAF50;
+	padding:5px;
 }
 
 .acpt_btn{
@@ -24,4 +25,9 @@
 	border-radius:5px;
 	color:white;
 	text-decoration: none;
+}
+
+.link{
+	color:white !important;
+    text-decoration:none;!important;	
 }
