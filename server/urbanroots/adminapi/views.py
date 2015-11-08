@@ -1,4 +1,3 @@
-import json
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -7,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.core import serializers
 
 import json
 import logging
@@ -49,6 +49,7 @@ def volunteer_apply(request):
                                  skills="")
     return HttpResponse(json.dumps({"success": "true"}))
 
+@login_required
 @csrf_exempt
 def volunteer_accept(request, userid):
     """ Admin accepts a volunteer application """
@@ -63,7 +64,7 @@ def volunteer_accept(request, userid):
 
     return HttpResponse(status=200)
 
-
+@login_required
 @csrf_exempt
 def volunteer_reject(request, userid):
     """ Admin rejects a volunteer application """
@@ -80,14 +81,27 @@ def volunteer_jobs(request, userid):
     try:
         user_v = User.objects.get(id=userid)
         vol = UserVolunteer.objects.get(user=user_v)
-        jobs_list = JobsList.objects.get(volunteer=vol)
+        jobs_list = JobsList.objects.filter(volunteer=vol)
         jobs = [j.job for j in jobs_list]
+        jobs_dict = {}
+        for job in jobs:
+            jobs_dict[job.name] = {
+                "name": job.name,
+                "created": str(job.created),
+                "completed": job.completed,
+                "accepted": job.accepted,
+                "latitude": job.latitude,
+                "longitude": job.longitude,
+                "description": job.description,
+                "location": job.location.name,
+            }
         
     except User.DoesNotExist:
         return HttpResponse(404)
 
-    return HttpResponse(json.dumps(jobs))
+    return HttpResponse(json.dumps(jobs_dict))
 
+@login_required
 @csrf_exempt
 def volunteer_assign(request, userid, jobid):
     """ Assign a job to a volunteer """
@@ -157,6 +171,7 @@ def report_submit(request, userid):
     # OK
     return HttpResponse(json.dumps({'success': 'true'}))
 
+@login_required
 @csrf_exempt
 def report_accept(request, reportid):
     """ Admin accepts a report """
@@ -168,6 +183,7 @@ def report_accept(request, reportid):
     # refresh page
     return HttpResponse(status=200)
 
+@login_required
 @csrf_exempt
 def report_reject(request, reportid):
     """ Admin rejects a report """
@@ -187,11 +203,20 @@ def report(request, reportid):
     context_dict = {}
 
     # fetch report data
-    context_dict['report'] = Job.objects.get(id=reportid)
-    context_dict['volunteers'] = UserVolunteer.objects.all()
+
+    this_job = Job.objects.get(id=reportid)
+    this_volunteers = UserVolunteer.objects.all()
+    this_job_list = JobsList.objects.all()
+
+    for this_volunteer in this_volunteers:
+        for job_list_item in this_job_list:
+            if job_list_item.volunteer.id == this_volunteer.id:
+                this_volunteer.assigned = True
+
+    context_dict['report'] = this_job
+    context_dict['volunteers'] = this_volunteers
     context_dict['arealist'] = AreasList.objects.all()
-    context_dict['job'] = Job.objects.get(id=reportid)
-    context_dict['joblist'] = JobsList.objects.all()
+    # context_dict['job'] = Job.objects.get(id=reportid) duplicate od report?
 
     return render(request, 'report.html', context_dict)
 
@@ -244,7 +269,8 @@ def user_login(request):
     else:
         return render(request, 'login.html', {})
 
-    
+
+@login_required
 def job_accept(request, jobid):
     """ Admin marks a job as accepted """
     try:
@@ -256,6 +282,7 @@ def job_accept(request, jobid):
 
     return HttpResponse(status=200)
 
+@login_required
 def job_reject(request, jobid):
     """ Admin rejects a job """
     try:
@@ -266,7 +293,7 @@ def job_reject(request, jobid):
 
     return HttpResponse(status=200)
 
-
+@login_required
 def assign_volunteer(request):
     # assigns or unassigns volunteer ot a job
     # jquery

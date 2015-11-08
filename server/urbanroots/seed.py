@@ -114,7 +114,7 @@ for volunteer in volunteers:
     skill_list1 = SkillsList.objects.get_or_create(volunteer=v[0],
                                                    skill=skill1)
     job = Job.objects.get_or_create(name=rep_names[i],accepted=False, created=datetime.datetime.today()
-, description=rep_descrpts[i])
+                                    , description=rep_descrpts[i], location=Area.objects.get(name="Ibrox"))
     i+=1
     #for skill_list in SkillsList.objects.all():
         #print(skill_list.volunteer.user.first_name, skill_list.skill.name)
