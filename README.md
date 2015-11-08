@@ -1,25 +1,15 @@
-# team-2
+# Urban Roots Volunteering App
 
-List of urls
+This app was developed for the Code For Good challenge by J.P. Morgan.
 
-GET /volunteer
-POST /volunteer/apply
-POST /volunteer/<id>/accept
-POST /volunteer/<id>/rejevt
+It lets users apply as volunteers for the non-profit Urban Roots, whose primary aim is to sponsor community gardens.
+It also lets users submit reports about things that need to be done in the community. Administrators can assign tasks to volunteers.
 
-GET ... /jobs/
-POST.../assign/jobid
-GET /volunteer/<id> (profile)
+## Architecture
 
--------------------------------------
-GET /reports/ (list of reports)
-GET /report/<id>
-POST /report/accept
-POST /report/id/rejact
-------------------------------------
-GET /job/<id> (description of job)
-POST /job/<id>/accept
-POST /job/<id>/reject
-------------------------------------
-POST /volunteer/<id>/notify ??
+The system has 3 semantically distinct parts:
+
+1. A REST API for interacting with the models (volunteers, jobs, reports, etc.)
+2. A web administrative interface, so that the admin can look over volunteering applications, accept them or reject them, look over reports, accept them or reject them, and assign volunteers to reports/jobs.
+3. A mobile application aimed at the volunteers which talks to the API.
 
