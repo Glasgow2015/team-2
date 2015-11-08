@@ -4,7 +4,7 @@
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -33,6 +33,8 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.org.urbanroots.activities.LoginScreen" />
+        </activity>
+        <activity android:name="uk.org.urbanroots.activities.LoggedInActivity" >
         </activity>
     </application>
 
