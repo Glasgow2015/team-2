@@ -21,7 +21,7 @@ def index(request):
 def volunteers(request):
     """ Display list of all volunteers """
     context_dict = {}
-    volunteers = UserVolunteer.objects.all()
+    volunteers = UserVolunteer.objects.filter(accepted=False)
     context_dict['volunteers'] = volunteers
     return render(request, 'volunteers.html', context_dict)
 
@@ -48,12 +48,14 @@ def volunteer_accept(request, userid):
     context_dict = {}
     try:
         u = User.objects.get(id=userid)
-        v = UserVolunteer.get(user=u)
+        v = UserVolunteer.objects.get(user=u)
         v.accepted=True
-    except Entry.DoesNotExist:
-        return HttpResponse(404)
+        v.save()
+    except User.DoesNotExist:
+        return HttpResponse(status=404)
 
-    return volunteer(request, userid)
+    return HttpResponse(status=200)
+
 
 def volunteer_reject(request, userid):
     """ Admin rejects a volunteer application """
@@ -145,15 +147,18 @@ def report_submit(request, userid):
     # OK
     return HttpResponse(json.dumps({'success': 'true'}))
 
+@csrf_exempt
 def report_accept(request, reportid):
     """ Admin accepts a report """
     # mark report as accepted
     rep = Job.objects.get(id=reportid)
     rep.accepted = True
+    rep.save()
 
     # refresh page
     return HttpResponse(status=200)
 
+@csrf_exempt
 def report_reject(request, reportid):
     """ Admin rejects a report """
     # delete report alltogether

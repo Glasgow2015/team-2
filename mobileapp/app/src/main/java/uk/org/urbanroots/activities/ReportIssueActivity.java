@@ -1,13 +1,8 @@
 package uk.org.urbanroots.activities;
 
-import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.pm.PackageManager;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -16,14 +11,12 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.JsonRequest;
-import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -75,18 +68,19 @@ public class ReportIssueActivity extends AppCompatActivity {
         }
 
         String url = Requests.getInstance().getBaseUrl() + "report/submit/2";
+        Log.w(LoginScreen.LOG_TAG, url);
 
         JSONObject jo = new JSONObject();
         try {
             jo.put("name", title);
             jo.put("description", description);
             jo.put("location", location);
-            jo.put("latitude", 0);
-            jo.put("longitude", 0);
+            jo.put("latitude", "0");
+            jo.put("longitude", "0");
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
+        Log.w(LoginScreen.LOG_TAG, jo.toString());
         JsonRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jo,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -100,8 +94,6 @@ public class ReportIssueActivity extends AppCompatActivity {
                         error.printStackTrace();
                     }
                 });
-
-
 
         mRequestQueue.add(postRequest);
     }
@@ -122,36 +114,36 @@ public class ReportIssueActivity extends AppCompatActivity {
     }
 
     // Redundant for now
-    private class LocationGetter implements ConnectionCallbacks, OnConnectionFailedListener {
-
-        private GoogleApiClient mGoogleApiClient;
-        private Context mContext;
-
-        LocationGetter(Context c) {
-            mContext = c;
-        }
-
-        protected synchronized void buildGoogleApiClient(Context context) {
-            mGoogleApiClient = new GoogleApiClient.Builder(mContext)
-                    .addConnectionCallbacks(this)
-                    .addOnConnectionFailedListener(this)
-                    .addApi(LocationServices.API)
-                    .build();
-        }
-
-        @Override
-        public void onConnected(Bundle bundle) {
-
-        }
-
-        @Override
-        public void onConnectionSuspended(int i) {
-
-        }
-
-        @Override
-        public void onConnectionFailed(ConnectionResult connectionResult) {
-
-        }
-    }
+//    private class LocationGetter implements ConnectionCallbacks, OnConnectionFailedListener {
+//
+//        private GoogleApiClient mGoogleApiClient;
+//        private Context mContext;
+//
+//        LocationGetter(Context c) {
+//            mContext = c;
+//        }
+//
+//        protected synchronized void buildGoogleApiClient(Context context) {
+//            mGoogleApiClient = new GoogleApiClient.Builder(mContext)
+//                    .addConnectionCallbacks(this)
+//                    .addOnConnectionFailedListener(this)
+//                    .addApi(LocationServices.API)
+//                    .build();
+//        }
+//
+//        @Override
+//        public void onConnected(Bundle bundle) {
+//
+//        }
+//
+//        @Override
+//        public void onConnectionSuspended(int i) {
+//
+//        }
+//
+//        @Override
+//        public void onConnectionFailed(ConnectionResult connectionResult) {
+//
+//        }
+//    }
 }

@@ -46,7 +46,6 @@
         android:id="@+id/tv_chosen_location"
         android:text="@string/default_location_text"
         android:textSize="25sp"
-        android:layout_below="@+id/b_pick_location"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="20dp" />
 
@@ -58,17 +57,6 @@
         android:onClick="sendReport"
         android:layout_below="@+id/tv_chosen_location"
         android:layout_centerHorizontal="true" />
-
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="Small Text"
-        android:id="@+id/textView"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginBottom="37dp" />
 
 
 </RelativeLayout>
