@@ -5,7 +5,7 @@
 <br>
  <ul class="nav nav-pills" id="post-links">
 
-            <li role="presentation" class="active" ><a href="/volunteer">Current pplications</a></li>
+            <li role="presentation" class="active" ><a href="/volunteer">Current applications</a></li>
 
             <li role="presentation" ><a href="/current_volunteers">Registered volunteers</a></li>
 </ul>
@@ -23,15 +23,19 @@
     {% if volunteer.email %}
     <p>Email {{ volunteer.user.email }}</p>
     {% endif %}
+    <p>{{ volunteer.address }}</p>
+    </div>
+    <div class="col-lg-offset-4">
+    
+    <br>
     {% if volunteer.skills %}
     <p>Skills: {{ volunteer.skills }}</p>
     {% endif %}
-
     </div>
 
-   <div class="col-lg-6 col-lg-offset-1">
-       <p>{{ volunteer.address }}</p>
-   </div>
+   <!-- <div class="col-lg-6 col-lg-offset-2">
+       
+   </div> -->
    <!-- </a> -->
    <div class="col-lg-offset-9 col-lg-4">
        {% if not volunteer.accepted  %}
