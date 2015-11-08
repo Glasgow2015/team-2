@@ -36,7 +36,7 @@
 
         <div class="navbar-header">
             <ul class="nav navbar-nav">
-                <li class="col-lg-offset-2"><img id="logo" width="100"
+                <li class="col-lg-offset-2"><img id="logo" width="170"
                 height="50" src="{% static 'UrbanRoots_Logo.png' %}"
                 alt="Urban Roots logo" onclick="window.open('http://www.urbanroots.org.uk/')"/></li>
                 <!-- <li><a class="navbar-brand" href="/" id="brand_name">Urban Roots</a></li> -->
@@ -54,8 +54,8 @@
                 </li>
             </ul>
         </div>
-        <div class="navbar-collapse collapse">
-
+        <div class="navbar-collapse collapse" id="colapse">
+            
             <ul class="nav navbar-nav navbar-right">
             {% if not reports %}
             <li><a class="link" href="/reports">Reports</a></li>
@@ -69,7 +69,7 @@
 			{% else %}
             <li><a class="link" href="/login">Login</a></li>
             {% endif %}
-
+            
 
 
             </ul>
