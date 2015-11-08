@@ -34,8 +34,8 @@
    <div class="col-lg-offset-9 col-lg-4">
        {% if not volunteer.accepted  %}
        
-       <button class="btn  acpt_btn" onclick="accept({{ volunteer.id }})">Accept</button>
-       <button class="btn  acpt_btn" onclick="decline({{ volunteer.id }})">Decline</button>
+       <button class="btn  acpt_btn" onclick="accept({{ volunteer.user.id }})">Accept</button>
+       <button class="btn  acpt_btn" onclick="decline({{ volunteer.user.id }})">Decline</button>
        {% endif %}
        </div>
 </div>
