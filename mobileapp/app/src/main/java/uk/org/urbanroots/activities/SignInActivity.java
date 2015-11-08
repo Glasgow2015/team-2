@@ -42,7 +42,7 @@ public class SignInActivity extends AppCompatActivity {
             toast.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
             toast.show();
 
-            Intent intent = new Intent(this, LoginScreen.class);
+            Intent intent = new Intent(this, LoggedInActivity.class);
             startActivity(intent);
         } else{
             Toast toast = Toast.makeText(getApplicationContext(), "Invalid login",
