@@ -67,6 +67,7 @@
 							
 								<p>{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</p>
 								<p>Skills: {{ volunteer.skills }}</p>
+								<p>ID: {{ volunteer.id }}</p>
 								<p>Area: 
 								
 								{% for area in arealist %}
@@ -79,7 +80,20 @@
 							</div>
 							
 							<div class="col-md-2">							
-								<button class="btn acpt_btn" onclick="assign({{ volunteer.user.id }}, {{ report.id }})">Assign</button>
+								<button class="btn acpt_btn" 
+								onclick="assign({{ volunteer.id }}, {{ report.id }})">
+								
+								{% for job_list_item in joblist %}
+									
+									{% if volunteer.id == job_list_item.volunteer.user.id %}
+										Unassign
+									{% elif volunteer.id != job_list_item.volunteer.user.id%}
+										Assign
+									{% endif %}
+								
+								
+								{% endfor %}
+								Assign</button>
 							</div>			
 							
 							</p>
@@ -97,6 +111,7 @@
 <script>
 	function assign(vol_id, job_id){	
 		// assign volunteer to a job
+		
 		$.get('/assign_volunteer/', {volunteer_id: vol_id, job_id: job_id})
 	}
 	
