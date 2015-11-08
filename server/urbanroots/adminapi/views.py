@@ -223,7 +223,7 @@ def user_login(request):
             if user.is_active:
                 # valid active account
                 login(request, user)
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/reports')
 
             else:
                 # inactive account

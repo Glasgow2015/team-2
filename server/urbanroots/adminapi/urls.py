@@ -2,7 +2,7 @@ from django.conf.urls import patterns, url
 from adminapi import views
 
 urlpatterns = patterns('',
-                       url(r'^$', views.index, name='index'),
+                       url(r'^$', views.user_login),
 
                        url(r'^volunteer/$', views.volunteers),
                        url(r'^current_volunteers/$', views.current_volunteers),
