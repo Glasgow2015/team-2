@@ -105,7 +105,8 @@ for volunteer in volunteers:
     u.last_name = volunteer[1].split()[1]
     u.save()
     v = UserVolunteer.objects.get_or_create(user=u,
-                                            phone_number="123456789", skills="gardening, painting")
+                                            phone_number="123456789", skills="gardening, painting",
+                                            address="101 Govan Road")
     skill0 = Skill.objects.get(name=skills[0])
     skill1 = Skill.objects.get(name=skills[1])
     skill_list0 = SkillsList.objects.get_or_create(volunteer=v[0],
@@ -125,4 +126,3 @@ for volunteer in volunteers:
     #for area_list in AreasList.objects.all():
         #print(area_list.volunteer.user.first_name, area_list.area.name)
     
-# Add jobs

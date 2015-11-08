@@ -1,6 +1,6 @@
 import json
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
@@ -64,10 +64,11 @@ def volunteer_accept(request, userid):
     return HttpResponse(status=200)
 
 
+@csrf_exempt
 def volunteer_reject(request, userid):
     """ Admin rejects a volunteer application """
     u = User.objects.get(id=userid)
-    v = UserVolunteer.get(user=u)
+    v = UserVolunteer.objects.get(user=u)
     v.delete()
     u.delete()
 
@@ -75,17 +76,19 @@ def volunteer_reject(request, userid):
 
 def volunteer_jobs(request, userid):
     """ Inspect a user's jobs list """
-    context_dict = {}
 
     try:
         user_v = User.objects.get(id=userid)
         vol = UserVolunteer.objects.get(user=user_v)
-        context_dict['jobs'] = JobsList.objects.get(volunteer=vol)
+        jobs_list = JobsList.objects.get(volunteer=vol)
+        jobs = [j.job for j in jobs_list]
+        
     except User.DoesNotExist:
         return HttpResponse(404)
 
-    return render(request, '', context_dict)
+    return HttpResponse(json.dumps(jobs))
 
+@csrf_exempt
 def volunteer_assign(request, userid, jobid):
     """ Assign a job to a volunteer """
     try:
@@ -95,9 +98,9 @@ def volunteer_assign(request, userid, jobid):
         JobsList.objects.get_or_create(volunteer=vol,
                                        job=job_v)
     except User.DoesNotExist:
-        return HttpResponse(404)
+        return HttpResponse(status=404)
 
-    return volunteer(request, userid)
+    return HttpResponse(status=200)
 
 def volunteer(request, userid):
     """ View a volunteer's profile """
@@ -173,7 +176,9 @@ def report_reject(request, reportid):
     rep.delete()
 
     # refresh page
-    return report(request, reportid)
+    #return report(request, reportid)
+
+    return HttpResponse(status=200)
 
 
 def report(request, reportid):
@@ -186,6 +191,7 @@ def report(request, reportid):
     context_dict['volunteers'] = UserVolunteer.objects.all()
     context_dict['arealist'] = AreasList.objects.all()
     context_dict['job'] = Job.objects.get(id=reportid)
+    context_dict['joblist'] = JobsList.objects.all()
 
     return render(request, 'report.html', context_dict)
 
@@ -207,7 +213,12 @@ def job(request, jobid):
     
     return JsonResponse(context_dict)
 
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
+    
 def user_login(request):
 
     if request.method == 'POST':
@@ -220,7 +231,7 @@ def user_login(request):
             if user.is_active:
                 # valid active account
                 login(request, user)
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/reports')
 
             else:
                 # inactive account
@@ -255,3 +266,33 @@ def job_reject(request, jobid):
 
     return HttpResponse(status=200)
 
+
+def assign_volunteer(request):
+    # assigns or unassigns volunteer ot a job
+    # jquery
+
+    ajax_response = "Failure"
+
+    if request.method == 'GET':
+
+        volunteer_id = request.GET['volunteer_id']
+        job_id = request.GET['job_id']
+
+
+        
+
+        this_volunteer = UserVolunteer.objects.get(id=volunteer_id)
+
+        this_job = Job.objects.get(id=job_id)
+
+        if not JobsList.objects.filter(volunteer=this_volunteer, job=this_job).exists():
+            this_job_list_item = JobsList.objects.create(volunteer=this_volunteer, job=this_job)
+            this_job_list_item.save()
+
+            ajax_response = "Success"
+
+        else:
+            JobsList.objects.filter(volunteer=this_volunteer, job=this_job).delete()
+            ajax_response = "Success"
+
+    return HttpResponse(ajax_response)

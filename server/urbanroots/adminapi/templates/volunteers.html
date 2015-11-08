@@ -4,13 +4,15 @@
 
 <br>
  <ul class="nav nav-pills" id="post-links">
-            <li role="presentation" class="active" ><a href="">Current applications</a></li>
-            <li role="presentation" ><a href="">Registered Volunteers</a></li>
+
+            <li role="presentation" class="active" ><a href="/volunteer">Current applications</a></li>
+
+            <li role="presentation" ><a href="/current_volunteers">Registered Volunteers</a></li>
 </ul>
 
 
 <div id="reports bg-success">
- <h2>Volunteers</h2>
+ <h2>Volunteering applications</h2>
 {%  for volunteer in volunteers %}
 
 <div class="col-md-12 report" >
@@ -34,8 +36,8 @@
    <div class="col-lg-offset-9 col-lg-4">
        {% if not volunteer.accepted  %}
        
-       <button class="btn  acpt_btn" onclick="accept({{ volunteer.id }})">Accept</button>
-       <button class="btn  acpt_btn" onclick="decline({{ volunteer.id }})">Decline</button>
+       <button class="btn  acpt_btn" onclick="accept({{ volunteer.user.id }})">Accept</button>
+       <button class="btn  btn-danger" onclick="reject({{ volunteer.user.id }})">Decline</button>
        {% endif %}
        </div>
 </div>
@@ -46,12 +48,14 @@
     function accept(id){
     	$.get('/volunteer/'+id+'/accept', function(data){
          // $('#questions').html(data);
+         location.reload();
         });
     }
 
-    function accept(id){
-      $.get('/volunteer/'+id+'/decline', function(data){
+    function reject(id){
+      $.get('/volunteer/'+id+'/reject', function(data){
          // $('#questions').html(data);
+         location.reload();
         });
     }
 </script>

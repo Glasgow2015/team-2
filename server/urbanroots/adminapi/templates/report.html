@@ -4,79 +4,88 @@
 
 	<br><br><br>
 	
-	<div class="container">
-		<div class="col-md-12">
-			<div class="col-md-4">
-				<h2>{{ report.name }}</h2>
-				<br>
-				<div class="row">
-					<div class="col-md-3">
-						<p>Description</p>
-					</div>
+	<div class="container">		
+				<div class="col-md-12">
 					
-					<div class="col-md-7">
-						<p>{{ report.description }}</p>
-					</div>	
-				</div>
-				
-				<div class="row">
-					<div class="col-md-3">
-						<p>Location</p>
+					<div class="col-md-4">
+						<div class="panel panel-primary">
+			<div class="panel-body beer-content">
+						<h2>{{ report.name }}</h2>
+						<br>
+						<div class="row">
+							<div class="col-md-3">
+								<p>Description</p>
+							</div>
+							
+							<div class="col-md-7">
+								<p>{{ report.description }}</p>
+							</div>	
+						</div>
+						
+						<div class="row">
+							<div class="col-md-3">
+								<p>Location</p>
+							</div>
+							
+							<div class="col-md-7">
+								<p>{{ report.location }}</p>						
+							</div>	
+						</div>
+						
+						<div class="row">
+							<div class="col-md-3">
+								<p>Latitude</p>
+							</div>
+							
+							<div class="col-md-7">
+								<p>{{ report.latitude }}</p>						
+							</div>	
+						</div>
+						
+						<div class="row">
+							<div class="col-md-3">
+								<p>Longitude</p>
+							</div>
+							
+							<div class="col-md-7">
+								<p>{{ report.longitude }}</p>						
+							</div>	
+						</div>				
+						
+						
 					</div>
-					
-					<div class="col-md-7">
-						<p>{{ report.location }}</p>						
-					</div>	
-				</div>
-				
-				<div class="row">
-					<div class="col-md-3">
-						<p>Latitude</p>
-					</div>
-					
-					<div class="col-md-7">
-						<p>{{ report.latitude }}</p>						
-					</div>	
-				</div>
-				
-				<div class="row">
-					<div class="col-md-3">
-						<p>Longitude</p>
-					</div>
-					
-					<div class="col-md-7">
-						<p>{{ report.longitude }}</p>						
-					</div>	
-				</div>				
-				
-				
+				</div>	
 			</div>
 			
-			
-			
-			<div class="col-md-4">
+			<div class="col-md-5" id="locvolunteerlist">
 				<h3> Local Volunteers</h2>
 				<br>
 				{% for volunteer in volunteers %}
 					<div class="panel panel-primary">
 						<div class="panel-body beer-content">
-							<p>{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</p>
-							<p>Skills: {{ volunteer.skills }}</p>
-							<p>Area: 
+							<div class="col-md-9">
 							
-							{% for area in arealist %}
-								{% ifequal volunteer.user.username area.volunteer.user.username %}
-							
-								{{ area.area.name }}
+								<p>{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</p>
+								<p>Skills: {{ volunteer.skills }}</p>
+								<p>ID: {{ volunteer.id }}</p>
+								<p>Area: 
 								
-								{% endifequal %}
-							{% endfor %}
+								{% for area in arealist %}
+									{% ifequal volunteer.user.username area.volunteer.user.username %}
+								
+									{{ area.area.name }}
+									
+									{% endifequal %}
+								{% endfor %}							
+							</div>
 							
-							
-							
-							
-							
-							
+							<div class="col-md-2">							
+								<button id="{{ volunteer.id }}" class="btn acpt_btn" 
+								onclick="assign({{ volunteer.id }}, {{ report.id }})">
+								
+								Assign
+								</button>
+							</div>			
 							
 							</p>
 						</div>
@@ -89,6 +98,21 @@
 			</div>
 		</div>
 	</div>
+	
+<script>
+	function assign(vol_id, job_id){	
+		// assign volunteer to a job
+		
+		
+		$.get('/assign_volunteer/', {volunteer_id: vol_id, job_id: job_id})
+        location.reload();
+	}
+	
+	
+
+
+
+</script>	
 	
 	
 {% endblock %}
