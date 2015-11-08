@@ -63,10 +63,14 @@ rep_descrpts = ["Fence broken next to Castle Road",
      "Shed window smashed in garden next to McCulloch Street ",
      "Wall next to garden shed has been spray painted"
      ]
+rep_names = [
+    "Fence broken by vandals next to garden shed",
+    "Wall burnt by vandals next to garden shed",
+    "Garden next to Govan Road",
+    "Bin set on fire next to road at left side of Priesthill Garden",
+]
 rep_descrpts = [
     """
-    Fence broken by vandals next to garden shed.
-
     I was walking by the garden shed behind my building in Pollock,
     and I noticed that the roof of the shed has been vandalised.
     There are multiple tears in the roof, probably made a sharp blade,
@@ -74,23 +78,17 @@ rep_descrpts = [
     The crops themselves seem intact.
     """,
     """
-    Wall burnt by vandals next to garden shed.
-
     One of the walls of the shed in Ibrox has been reduced to ashes.
     I heard some loud noises from people last night, obviously drunk,
     and talking about setting something on fire. Unfortunately I'm
     not able to indentify any one of them.
     """,
     """
-    Garden next to Govan Road
-
     There's a good opportunity to start a community garden right
     next to Govan Road, towards the supermarket. The lot opposite
     is just sitting there and I don't think anyone would mind.
     """,
     """
-    Bin set on fire next to road at left side of Priesthill Garden
-
     Just this minute I noticed two kids settings fire to the bin
     near Priesthill Garden. If this spreads, it could be trouble.
     """,
@@ -98,6 +96,7 @@ rep_descrpts = [
 
 User.objects.all().delete()
 UserVolunteer.objects.all().delete()
+Job.objects.all().delete()
 
 for volunteer in volunteers:
 
