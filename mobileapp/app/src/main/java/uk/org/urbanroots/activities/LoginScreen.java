@@ -12,6 +12,7 @@ import uk.org.urbanroots.util.ToolbarVisualiser;
 public class LoginScreen extends AppCompatActivity {
     public static final String LOG_TAG = "jpmorganchase";
     public static final String PREFS_NAME = "jpmorganchaseprefsfile";
+    public static final String TASK_NOTIFICATION_GROUP = "task_notifications_group";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
