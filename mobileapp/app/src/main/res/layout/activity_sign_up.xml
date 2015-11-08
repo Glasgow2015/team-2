@@ -84,6 +84,7 @@
                 android:hint="@string/signup_location" />
 
             <Button
+                style="@style/AppTheme.AccentButton"
                 android:id="@+id/b_submit"
                 android:layout_width="300dp"
                 android:layout_height="wrap_content"
