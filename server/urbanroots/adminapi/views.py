@@ -176,7 +176,9 @@ def report_reject(request, reportid):
     rep.delete()
 
     # refresh page
-    return report(request, reportid)
+    #return report(request, reportid)
+
+    return HttpResponse(status=200)
 
 
 def report(request, reportid):
@@ -276,13 +278,11 @@ def assign_volunteer(request):
         volunteer_id = request.GET['volunteer_id']
         job_id = request.GET['job_id']
 
-        print volunteer_id
 
         
 
         this_volunteer = UserVolunteer.objects.get(id=volunteer_id)
 
-        print this_volunteer
         this_job = Job.objects.get(id=job_id)
 
         if not JobsList.objects.filter(volunteer=this_volunteer, job=this_job).exists():
