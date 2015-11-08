@@ -16,7 +16,7 @@
     padding:5px;
     background-color: white;
 }
-.report:hover{
+.report,#logo:hover{
 	cursor: pointer;
 cursor: hand;
 }
