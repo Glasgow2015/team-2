@@ -1,4 +1,3 @@
-import json
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
@@ -7,6 +6,7 @@ from django.core.exceptions import ObjectDoesNotExist
 from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse
 from django.contrib.auth.models import User
+from django.core import serializers
 
 import json
 import logging
@@ -81,13 +81,25 @@ def volunteer_jobs(request, userid):
     try:
         user_v = User.objects.get(id=userid)
         vol = UserVolunteer.objects.get(user=user_v)
-        jobs_list = JobsList.objects.get(volunteer=vol)
+        jobs_list = JobsList.objects.filter(volunteer=vol)
         jobs = [j.job for j in jobs_list]
+        jobs_dict = {}
+        for job in jobs:
+            jobs_dict[job.name] = {
+                "name": job.name,
+                "created": str(job.created),
+                "completed": job.completed,
+                "accepted": job.accepted,
+                "latitude": job.latitude,
+                "longitude": job.longitude,
+                "description": job.description,
+                "location": job.location.name,
+            }
         
     except User.DoesNotExist:
         return HttpResponse(404)
 
-    return HttpResponse(json.dumps(jobs))
+    return HttpResponse(json.dumps(jobs_dict))
 
 @login_required
 @csrf_exempt
