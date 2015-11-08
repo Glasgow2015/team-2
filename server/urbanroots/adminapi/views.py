@@ -236,6 +236,7 @@ def job_accept(request, jobid):
     try:
         job = Job.objects.get(id=jobid)
         job.accepted=True
+        job.save()
     except Entry.DoesNotExist:
         return HttpResponse(status=404)
 
