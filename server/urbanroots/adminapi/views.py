@@ -175,16 +175,10 @@ def report(request, reportid):
     context_dict = {}
 
     # fetch report data
-    report = Job.objects.get(id=reportid)
-    context_dict['report_name'] = report.name
-    context_dict['report_creation_date'] = report.created
-    context_dict['report_completion_date'] = report.completed
-    context_dict['report_accepted'] = report.accepted
-    context_dict['report_latitude'] = report.latitude
-    context_dict['report_longitude'] = report.longitude
-    context_dict['report_description'] = report.description
+    context_dict['report'] = Job.objects.get(id=reportid)
+    context_dict['volunteers'] = UserVolunteer.objects.all()
 
-    return render(request, '', context_dict)
+    return render(request, 'report.html', context_dict)
 
 @csrf_exempt
 def job(request, jobid):
@@ -236,6 +230,7 @@ def job_accept(request, jobid):
     try:
         job = Job.objects.get(id=jobid)
         job.accepted=True
+        job.save()
     except Entry.DoesNotExist:
         return HttpResponse(status=404)
 
