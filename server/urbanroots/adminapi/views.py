@@ -247,3 +247,25 @@ def job_reject(request, jobid):
 
     return HttpResponse(status=200)
 
+
+def assign_volunteer(request):
+    # assigns volunteer ot a job
+    # jquery
+
+    ajax_response = "Failure"
+
+    if request.method == 'GET':
+
+        volunteer_id = request.GET['volunteer_id']
+        job_id = request.GET['job_id']
+
+        this_volunteer = UserVolunteer.objects.get(id=volunteer_id)
+        this_job = Job.objects.get(id=job_id)
+
+        if not JobsList.objects.filter(volunteer=this_volunteer, job=this_job).exists():
+            this_job_list_item = JobsList.objects.create(volunteer=this_volunteer, job=this_job)
+            this_job_list_item.save()
+
+            ajax_response = "Success"
+
+    return HttpResponse(ajax_response)

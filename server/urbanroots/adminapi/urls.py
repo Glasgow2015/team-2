@@ -22,5 +22,7 @@ urlpatterns = patterns('',
                        url(r'^job/(?P<jobid>[\w\-]+)/accept/$', views.job_accept),
                        url(r'^job/(?P<jobid>[\w\-]+)/reject/$', views.job_reject),
 
+                       url(r'^assign_volunteer/$', views.assign_volunteer), # for jquery assign
+
                        url(r'^login/$', views.user_login, name='login'),
 )
