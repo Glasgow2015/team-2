@@ -37,12 +37,15 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="Lorem ipsum dolor sit amet, diam doming tacimates usu eu, nam tantas altera denique in. At nihil quodsi suavitate his. Et duo graece delectus eleifend, lorem dolore expetenda eam ei, ne vel ridens ocurreret democritum."
                 android:id="@+id/tv_task_description"
                 android:layout_below="@id/tv_task_title"
                 android:layout_marginBottom="25dp"/>
 
             <TextView
+                android:textStyle="bold"
+                android:textSize="14sp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/tv_task_location"

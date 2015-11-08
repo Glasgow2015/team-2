@@ -53,8 +53,6 @@ public class SignUpActivity extends AppCompatActivity {
         tvLocation = (EditText) findViewById(R.id.tv_location);
 //        etSkills = (EditText) findViewById(R.id.et_skills);
         mRequestQueue = Volley.newRequestQueue(this);
-
-
     }
 
     public void submitRegistration(View view) {
@@ -65,6 +63,7 @@ public class SignUpActivity extends AppCompatActivity {
         final String contact = etContact.getText().toString();
         final String location = tvLocation.getText().toString();
 
+        String url = Requests.getInstance(getApplicationContext()).getBaseUrl() + "volunteer/apply";
         // The toasts for successfull or failed registration attempts
         final Toast toastSuccess = Toast.makeText(getApplicationContext(), "Registration Successful",
                 Toast.LENGTH_SHORT);
@@ -73,8 +72,6 @@ public class SignUpActivity extends AppCompatActivity {
         final Toast toastFailed = Toast.makeText(getApplicationContext(), "Registration Failed",
                 Toast.LENGTH_SHORT);
         toastFailed.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
-
-        String url = Requests.getInstance().getBaseUrl() + "volunteer/apply";
 
         if (    email.isEmpty() ||
                 password.isEmpty() ||
