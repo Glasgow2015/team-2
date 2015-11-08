@@ -37,7 +37,7 @@
        {% if not volunteer.accepted  %}
        
        <button class="btn  acpt_btn" onclick="accept({{ volunteer.user.id }})">Accept</button>
-       <button class="btn  acpt_btn" onclick="reject({{ volunteer.user.id }})">Decline</button>
+       <button class="btn  btn-danger" onclick="reject({{ volunteer.user.id }})">Decline</button>
        {% endif %}
        </div>
 </div>
