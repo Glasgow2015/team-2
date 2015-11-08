@@ -33,8 +33,8 @@ public class SignInActivity extends AppCompatActivity {
         final String email = etEmail.getText().toString();
         final String password = etPassword.getText().toString();
 
-        Log.d(LoginScreen.LOG_TAG, email);
-        Log.d(LoginScreen.LOG_TAG, password);
+        //Log.d(LoginScreen.LOG_TAG, email);
+        //Log.d(LoginScreen.LOG_TAG, password);
 
         if(email.equals("admin") && password.equals("admin")) {
             Toast toast = Toast.makeText(getApplicationContext(), "Logging in...",

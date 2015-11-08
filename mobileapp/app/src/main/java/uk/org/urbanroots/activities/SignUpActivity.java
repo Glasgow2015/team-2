@@ -53,6 +53,8 @@ public class SignUpActivity extends AppCompatActivity {
         tvLocation = (EditText) findViewById(R.id.tv_location);
 //        etSkills = (EditText) findViewById(R.id.et_skills);
         mRequestQueue = Volley.newRequestQueue(this);
+
+
     }
 
     public void submitRegistration(View view) {
@@ -62,6 +64,15 @@ public class SignUpActivity extends AppCompatActivity {
         final String lname = etLname.getText().toString();
         final String contact = etContact.getText().toString();
         final String location = tvLocation.getText().toString();
+
+        // The toasts for successfull or failed registration attempts
+        final Toast toastSuccess = Toast.makeText(getApplicationContext(), "Registration Successful",
+                Toast.LENGTH_SHORT);
+        toastSuccess.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
+
+        final Toast toastFailed = Toast.makeText(getApplicationContext(), "Registration Failed",
+                Toast.LENGTH_SHORT);
+        toastFailed.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
 
         String url = Requests.getInstance().getBaseUrl() + "volunteer/apply";
 
@@ -91,18 +102,33 @@ public class SignUpActivity extends AppCompatActivity {
                     new Response.Listener<JSONObject>() {
                         @Override
                         public void onResponse(JSONObject response) {
+
                             Log.w(LoginScreen.LOG_TAG, response.toString());
+                            try {
+                                if (response.getString("success").equals("true")) {
+                                    toastSuccess.show();
+                                    gotoHome();
+                                }
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
                         }
                     },
                     new Response.ErrorListener() {
                         @Override
                         public void onErrorResponse(VolleyError error) {
+                            toastFailed.show();
                             error.printStackTrace();
                         }
                     });
 
             mRequestQueue.add(postRequest);
         }
+    }
+
+    public void gotoHome() {
+        Intent intent = new Intent(this, LoginScreen.class);
+        startActivity(intent);
     }
 
 }
