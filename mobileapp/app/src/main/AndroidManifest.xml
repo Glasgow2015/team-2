@@ -13,29 +13,34 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
-        <activity android:name="uk.org.urbanroots.activities.LoginScreen" >
+        <activity android:name="uk.org.urbanroots.activities.LoginScreen"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="uk.org.urbanroots.activities.ReportIssueActivity" >
+        <activity android:name="uk.org.urbanroots.activities.ReportIssueActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.org.urbanroots.activities.LoginScreen" />
         </activity>
-        <activity android:name="uk.org.urbanroots.activities.SignUpActivity" >
+        <activity android:name="uk.org.urbanroots.activities.SignUpActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.org.urbanroots.activities.LoginScreen" />
         </activity>
-        <activity android:name="uk.org.urbanroots.activities.SignInActivity" >
+        <activity android:name="uk.org.urbanroots.activities.SignInActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="uk.org.urbanroots.activities.LoginScreen" />
         </activity>
-        <activity android:name="uk.org.urbanroots.activities.LoggedInActivity" >
+        <activity android:name="uk.org.urbanroots.activities.LoggedInActivity"
+            android:screenOrientation="portrait">
         </activity>
 
         <receiver

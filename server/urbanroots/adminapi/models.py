@@ -3,7 +3,7 @@ from datetime import datetime
 from django.contrib.auth.models import User
 
 
-# Volunteer
+# Volunteer User reporting or being assigned to jobs
 class UserVolunteer(models.Model):
 
     def __unicode__(self):
@@ -15,14 +15,17 @@ class UserVolunteer(models.Model):
     phone_number = models.CharField(max_length=15, blank=True, null=True)
     address = models.CharField(max_length=128, blank=True, null=True)
     skills = models.CharField(max_length=128, blank=True, null=True)
-
     accepted = models.BooleanField(default=False)
 
-    # dirty hack to pass boolean value to view
+    # used pass boolean value to view
     assigned = models.BooleanField(default=False)
 
 
+<<<<<<< HEAD
 # Urban Roots Admin
+=======
+# Urban Roots Administrative user
+>>>>>>> f2d05b69443917ac7b20ed0cea5a4f7601024031
 class UserOwner(models.Model):
 
     user = models.OneToOneField(User)
@@ -31,7 +34,7 @@ class UserOwner(models.Model):
         return self.user.username
 
 
-# Area Name
+# General location for jobs
 class Area(models.Model):
     name = models.CharField(max_length=128, unique=True)
 
@@ -47,7 +50,7 @@ class Category(models.Model):
         return self.name
 
 
-# Job instance
+# Represents a job in the system reported by app users and managed by administration
 class Job(models.Model):
     name = models.CharField(max_length=128)
     created = models.DateTimeField(default=datetime.now, blank=True, null=True)
@@ -58,7 +61,7 @@ class Job(models.Model):
     description = models.TextField()
     location = models.ForeignKey(Area, null=True) # this probably shouldn't be null
 
-    # Relationships
+    # Relationships **************************
     creator = models.ForeignKey(User, blank=True, null=True)
 
     def __unicode__(self):
@@ -73,7 +76,7 @@ class Skill(models.Model):
         return self.name
 
 
-# Intersecting Entities to resolve Many to Many rels
+# Intersecting Entities to resolve Many to Many relationships *************************************
 
 # List of Skills for Volunteers
 class SkillsList(models.Model):
