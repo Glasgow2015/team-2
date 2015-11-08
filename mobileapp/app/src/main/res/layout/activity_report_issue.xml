@@ -8,60 +8,72 @@
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
 
-    <EditText
-        android:layout_width="wrap_content"
+    <ScrollView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/et_title"
-        android:layout_below="@+id/app_bar"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="37dp"
-        android:hint="@string/problem_title"
-        android:layout_marginBottom="35dp"
-        android:width="300dp"/>
+        android:layout_below="@id/app_bar">
 
-    <EditText
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
-        android:inputType="textMultiLine"
-        android:ems="10"
-        android:layout_marginBottom="35dp"
-        android:id="@+id/et_description"
-        android:layout_below="@+id/et_title"
-        android:layout_centerHorizontal="true"
-        android:hint="@string/issue_description"/>
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/et_title"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="37dp"
+                android:hint="@string/problem_title"
+                android:layout_marginBottom="35dp"
+                android:width="300dp"/>
 
-    <Button
-        android:layout_width="160dp"
-        android:layout_height="wrap_content"
-        android:id="@+id/b_pick_location"
-        android:text="@string/pick_location"
-        android:onClick="pickLocation"
-        android:layout_below="@+id/et_description"
-        android:layout_alignLeft="@+id/et_description"
-        android:layout_alignStart="@+id/et_description" />
+            <EditText
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:inputType="textMultiLine"
+                android:ems="10"
+                android:layout_marginBottom="35dp"
+                android:id="@+id/et_description"
+                android:layout_below="@+id/et_title"
+                android:layout_centerHorizontal="true"
+                android:hint="@string/issue_description"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tv_chosen_location"
-        android:text="@string/default_location_text"
-        android:textSize="25sp"
-        android:layout_alignTop="@+id/b_pick_location"
-        android:layout_alignRight="@+id/et_description"
-        android:layout_alignEnd="@+id/et_description"
-        android:layout_above="@+id/b_send_report"
-        android:gravity="center_vertical"/>
+            <Button
+                android:layout_width="160dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/b_pick_location"
+                android:text="@string/pick_location"
+                android:onClick="pickLocation"
+                android:layout_below="@+id/et_description"
+                android:layout_alignLeft="@+id/et_description"
+                android:layout_alignStart="@+id/et_description" />
 
-    <Button
-        android:layout_width="300dp"
-        android:layout_height="50dp"
-        android:text="@string/send_report"
-        android:id="@+id/b_send_report"
-        android:onClick="sendReport"
-        android:layout_below="@+id/b_pick_location"
-        android:layout_alignLeft="@+id/b_pick_location"
-        android:layout_alignStart="@+id/b_pick_location"
-        android:layout_marginTop="46dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_chosen_location"
+                android:text="@string/default_location_text"
+                android:textSize="25sp"
+                android:layout_alignTop="@+id/b_pick_location"
+                android:layout_alignRight="@+id/et_description"
+                android:layout_alignEnd="@+id/et_description"
+                android:layout_above="@+id/b_send_report"
+                android:gravity="center_vertical"/>
+
+            <Button
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:text="@string/send_report"
+                android:id="@+id/b_send_report"
+                android:onClick="sendReport"
+                android:layout_below="@+id/b_pick_location"
+                android:layout_alignLeft="@+id/b_pick_location"
+                android:layout_alignStart="@+id/b_pick_location"
+                android:layout_marginTop="46dp" />
+        </RelativeLayout>
+
+    </ScrollView>
+
+
 
 
 </RelativeLayout>

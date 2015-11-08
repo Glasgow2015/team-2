@@ -63,14 +63,48 @@ rep_descrpts = ["Fence broken next to Castle Road",
      "Shed window smashed in garden next to McCulloch Street ",
      "Wall next to garden shed has been spray painted"
      ]
+rep_names = [
+    "Fence broken by vandals next to garden shed",
+    "Wall burnt by vandals next to garden shed",
+    "Garden next to Govan Road",
+    "Bin set on fire next to road at left side of Priesthill Garden",
+]
+rep_descrpts = [
+    """
+    I was walking by the garden shed behind my building in Pollock,
+    and I noticed that the roof of the shed has been vandalised.
+    There are multiple tears in the roof, probably made a sharp blade,
+    not sure why.
+    The crops themselves seem intact.
+    """,
+    """
+    One of the walls of the shed in Ibrox has been reduced to ashes.
+    I heard some loud noises from people last night, obviously drunk,
+    and talking about setting something on fire. Unfortunately I'm
+    not able to indentify any one of them.
+    """,
+    """
+    There's a good opportunity to start a community garden right
+    next to Govan Road, towards the supermarket. The lot opposite
+    is just sitting there and I don't think anyone would mind.
+    """,
+    """
+    Just this minute I noticed two kids settings fire to the bin
+    near Priesthill Garden. If this spreads, it could be trouble.
+    """,
+]
+
+User.objects.all().delete()
+UserVolunteer.objects.all().delete()
+Job.objects.all().delete()
+
 for volunteer in volunteers:
 
-    u = User.objects.get_or_create(username=volunteer[0],
-                                   first_name=volunteer[1].split()[0],
-                                   last_name=volunteer[1].split()[1],
-                                   password="123")
-
-    v = UserVolunteer.objects.get_or_create(user=u[0],
+    u = User.objects.create_user(volunteer[0], 'blank@what.com', '123')
+    u.first_name = volunteer[1].split()[0]
+    u.last_name = volunteer[1].split()[1]
+    u.save()
+    v = UserVolunteer.objects.get_or_create(user=u,
                                             phone_number="123456789", skills="gardening, painting")
     skill0 = Skill.objects.get(name=skills[0])
     skill1 = Skill.objects.get(name=skills[1])
