@@ -210,7 +210,7 @@ def user_login(request):
         if user:
             if user.is_active:
                 # valid active account
-                login(request, login)
+                login(request, user)
                 return HttpResponseRedirect('/')
 
             else:
