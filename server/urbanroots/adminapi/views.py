@@ -1,6 +1,6 @@
 import json
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
@@ -211,7 +211,12 @@ def job(request, jobid):
     
     return JsonResponse(context_dict)
 
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
+    
 def user_login(request):
 
     if request.method == 'POST':
@@ -224,7 +229,7 @@ def user_login(request):
             if user.is_active:
                 # valid active account
                 login(request, user)
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/reports')
 
             else:
                 # inactive account
