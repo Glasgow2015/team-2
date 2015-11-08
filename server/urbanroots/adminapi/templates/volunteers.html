@@ -2,14 +2,21 @@
 
 {% block body_block %}
 
+
+ <ul class="nav nav-pills" id="post-links">
+            <li role="presentation" ><a href="">Current applications</a></li>
+            <li role="presentation" ><a href="">Registered Volunteers</a></li>
+</ul>
+
+
 <div id="reports bg-success">
  <h2>Volunteers</h2>
 {%  for volunteer in volunteers %}
 
 <div class="col-md-12 report" >
-
-   <a href="{{ BASE_DIR }}/reports/{{ report.id }}" > <div class="col-md-3 col-md-offset-0 col-lg-3 col-lg-offset-0">
-    <p>{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</p>
+  <!-- <a href="{{ BASE_DIR }}/reports/{{ report.id }}" > -->
+    <div class="col-md-3 col-md-offset-0 col-lg-3 col-lg-offset-0">
+    <h4>{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</h4>
     <p>Phone: {{ volunteer.phone_number }}</p>
     {% if volunteer.email %}
     <p>Email {{ volunteer.user.email }}</p>
@@ -20,10 +27,10 @@
 
     </div>
 
-   <div class="col-lg-7 col-lg-offset-3">
+   <div class="col-lg-6 col-lg-offset-1">
        <p>{{ volunteer.address }}</p>
    </div>
-   </a>
+   <!-- </a> -->
    <div class="col-lg-offset-9 col-lg-3">
        {% if not volunteer.accepted  %}
        
