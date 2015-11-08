@@ -49,6 +49,7 @@ def volunteer_apply(request):
                                  skills="")
     return HttpResponse(json.dumps({"success": "true"}))
 
+@login_required
 @csrf_exempt
 def volunteer_accept(request, userid):
     """ Admin accepts a volunteer application """
@@ -63,7 +64,7 @@ def volunteer_accept(request, userid):
 
     return HttpResponse(status=200)
 
-
+@login_required
 @csrf_exempt
 def volunteer_reject(request, userid):
     """ Admin rejects a volunteer application """
@@ -88,6 +89,7 @@ def volunteer_jobs(request, userid):
 
     return HttpResponse(json.dumps(jobs))
 
+@login_required
 @csrf_exempt
 def volunteer_assign(request, userid, jobid):
     """ Assign a job to a volunteer """
@@ -157,6 +159,7 @@ def report_submit(request, userid):
     # OK
     return HttpResponse(json.dumps({'success': 'true'}))
 
+@login_required
 @csrf_exempt
 def report_accept(request, reportid):
     """ Admin accepts a report """
@@ -168,6 +171,7 @@ def report_accept(request, reportid):
     # refresh page
     return HttpResponse(status=200)
 
+@login_required
 @csrf_exempt
 def report_reject(request, reportid):
     """ Admin rejects a report """
@@ -244,7 +248,8 @@ def user_login(request):
     else:
         return render(request, 'login.html', {})
 
-    
+
+@login_required
 def job_accept(request, jobid):
     """ Admin marks a job as accepted """
     try:
@@ -256,6 +261,7 @@ def job_accept(request, jobid):
 
     return HttpResponse(status=200)
 
+@login_required
 def job_reject(request, jobid):
     """ Admin rejects a job """
     try:
@@ -266,7 +272,7 @@ def job_reject(request, jobid):
 
     return HttpResponse(status=200)
 
-
+@login_required
 def assign_volunteer(request):
     # assigns or unassigns volunteer ot a job
     # jquery
