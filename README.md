@@ -3,11 +3,11 @@
 This app was developed for the Code For Good challenge by J.P. Morgan.
 
 Code for Good - Team 2:
-Kristian Sonev              
-Craig Hamill
-Tomasz Hippner
-Christian Shtarkov
-Mike Harling
+Kristian Sonev,              
+Craig Hamill,
+Tomasz Hippner,
+Christian Shtarkov,
+Mike Harling,
 Alexander Ilov
 
 It lets users apply as volunteers for the non-profit Urban Roots, whose primary aim is to sponsor community gardens.
