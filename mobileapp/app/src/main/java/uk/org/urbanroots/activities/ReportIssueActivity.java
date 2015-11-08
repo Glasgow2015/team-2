@@ -23,7 +23,6 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-
 import uk.org.urbanroots.network.Requests;
 import uk.org.urbanroots.urbanroots.R;
 import uk.org.urbanroots.util.ToolbarVisualiser;
@@ -34,7 +33,6 @@ public class ReportIssueActivity extends AppCompatActivity {
     private EditText etDescription;
     private String[] locations;
     private TextView tvLocation;
-    private String mLocation;
     private RequestQueue mRequestQueue;
 
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +46,6 @@ public class ReportIssueActivity extends AppCompatActivity {
 
         mRequestQueue = Volley.newRequestQueue(this);
         locations = getResources().getStringArray(R.array.locations);
-        mLocation = locations[0];
     }
 
     public void sendReport(View view) {
@@ -59,11 +56,9 @@ public class ReportIssueActivity extends AppCompatActivity {
         // The toasts for successfull or failed submit
         final Toast toastSuccess = Toast.makeText(getApplicationContext(), "Report sent",
                 Toast.LENGTH_SHORT);
-        toastSuccess.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
 
-        final Toast toastFailed = Toast.makeText(getApplicationContext(), "An error occured",
+        final Toast toastFailed = Toast.makeText(getApplicationContext(), "An error occurred",
                 Toast.LENGTH_SHORT);
-        toastFailed.setGravity(Gravity.CENTER | Gravity.CENTER, 0, 0);
 
         if (title.isEmpty() || description.isEmpty() || location.isEmpty()) {
             Toast.makeText(this, "Please complete all fields", Toast.LENGTH_LONG).show();
@@ -83,7 +78,7 @@ public class ReportIssueActivity extends AppCompatActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        Log.w(LoginScreen.LOG_TAG, jo.toString());
+
         JsonRequest postRequest = new JsonObjectRequest(Request.Method.POST, url, jo,
                 new Response.Listener<JSONObject>() {
                     @Override
@@ -111,7 +106,6 @@ public class ReportIssueActivity extends AppCompatActivity {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 tvLocation.setText(locations[which]);
-                mLocation = locations[which];
             }
         });
 
@@ -119,41 +113,6 @@ public class ReportIssueActivity extends AppCompatActivity {
         dialog.show();
     }
     public void gotoHome() {
-        Intent intent = new Intent(this, LoginScreen.class);
-        startActivity(intent);
+        this.finish();
     }
-
-    // Redundant for now
-//    private class LocationGetter implements ConnectionCallbacks, OnConnectionFailedListener {
-//
-//        private GoogleApiClient mGoogleApiClient;
-//        private Context mContext;
-//
-//        LocationGetter(Context c) {
-//            mContext = c;
-//        }
-//
-//        protected synchronized void buildGoogleApiClient(Context context) {
-//            mGoogleApiClient = new GoogleApiClient.Builder(mContext)
-//                    .addConnectionCallbacks(this)
-//                    .addOnConnectionFailedListener(this)
-//                    .addApi(LocationServices.API)
-//                    .build();
-//        }
-//
-//        @Override
-//        public void onConnected(Bundle bundle) {
-//
-//        }
-//
-//        @Override
-//        public void onConnectionSuspended(int i) {
-//
-//        }
-//
-//        @Override
-//        public void onConnectionFailed(ConnectionResult connectionResult) {
-//
-//        }
-//    }
 }

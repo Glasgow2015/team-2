@@ -104,8 +104,8 @@ public final class Requests {
         NotificationCompat.Builder mBuilder =
                new NotificationCompat.Builder(mContext)
                         .setSmallIcon(R.drawable.logo)
-                        .setContentTitle("")
-                        .setContentText("Hello World!");
+                        .setContentTitle("Urban Roots")
+                        .setContentText("You have been invited to a volunteering event!");
 
         Intent resultIntent = new Intent(mContext, LoggedInActivity.class);
         TaskStackBuilder stackBuilder = TaskStackBuilder.create(mContext);

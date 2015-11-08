@@ -18,7 +18,6 @@ public class TaskPollAlarm extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.w(LoginScreen.LOG_TAG, "here");
         Requests.getInstance(context).pollAreThereNewTasks();
     }
 }
