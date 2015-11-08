@@ -35,11 +35,14 @@
     <div class="container-fluid">
 
         <div class="navbar-header">
-            <ul class="nav navbar-nav navbar-left">
-                <li class="col-lg-offset-2"><img width="100" height="50" src="{% static 'UrbanRoots_Logo.png' %}" alt="Urban Roots logo"/></li>
+            <ul class="nav navbar-nav">
+                <li class="col-lg-offset-2"><img width="100"
+                height="50" src="{% static 'UrbanRoots_Logo.png' %}"
+                alt="Urban Roots logo" onclick="window.open('http://www.urbanroots.org.uk/')"/></li>
                 <!-- <li><a class="navbar-brand" href="/" id="brand_name">Urban Roots</a></li> -->
-
+                
                 <li>
+
                     <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
                             data-target=".navbar-collapse">
                         <span class="sr-only">Toggle navigation</span>
@@ -47,15 +50,25 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-
+                 
                 </li>
             </ul>
         </div>
         <div class="navbar-collapse collapse">
 
             <ul class="nav navbar-nav navbar-right">
-
-               
+            {% if not reports %}
+            <li><a class="link" href="/reports">Reports</a></li>
+            {% endif %}
+            {% if not volunteers %}
+            <li><a class="link" href="/volunteer">Volunteers</a></li>
+            {% endif %}
+			
+			{% if user.is_authenticated %}
+			<li><a class="link" href="/logout">Logout</a></li>
+			{% else %}
+            <li><a class="link" href="/login">Login</a></li>
+            {% endif %}
 
 
 
@@ -66,12 +79,7 @@
 
 <div class="container">
 <div class="row">
-<!-- <div class="col-md-2">
-            <div class="sidebar-nav-fixed affix hidden-xs hidden-sm" id="left-block">
-{% block left_block %}
-
-{% endblock %}
-</div> -->
+<
     </div>
 <div id="centre_block" class="col-lg-8 col-md-8 col-lg-offset-2">
 
@@ -79,14 +87,6 @@
 
 </div>
 
-<!-- {% block right_block %}
-
-{% endblock %}
-    </div>
-</div> -->
-<!-- Bootstrap core JavaScript
-                            = -->
-<!-- Placed at the end of the document so the pages load faster -->
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
@@ -95,5 +95,21 @@
 
 <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
 <script src="http://getbootstrap.com/assets/js/ie10-viewport-bug-workaround.js"></script>
+<script>
+$('').click(function(){
+var rank = "";
+course = $('#quizzes-course').val();
+rank = $(this).text();
+ $.get('/peer_reply/get_quizzes/', {page_rank: rank, course_slug: course}, function(data){
+         $('#quizzes').html(data);
+        });
+$(this).tab('show');
+var count = $('#quizzes-paginator-count').val();
+count = parseInt(count)
+if(count > 10){
+$('#quiz-more-btn').show();
+}
+});
+</script>
 </body>
 </html>

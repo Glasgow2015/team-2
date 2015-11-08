@@ -3,6 +3,12 @@
 #body{
 	margin-top:50px;
 	background-color: #E8E8E8;
+	padding-bottom: 50px;
+}
+
+#login_container{
+	vertical-align: middle;
+	margin-top:100px;
 }
 .report{
 	margin:5px;
@@ -10,9 +16,15 @@
     padding:5px;
     background-color: white;
 }
+.report:hover{
+	cursor: pointer;
+cursor: hand;
+}
 
 #header{
 	background-color:#4CAF50;
+	padding:5px;
+	padding-right:20px;
 }
 
 .acpt_btn{
@@ -24,4 +36,9 @@
 	border-radius:5px;
 	color:white;
 	text-decoration: none;
+}
+
+.link{
+	color:white !important;
+    text-decoration:none;!important;	
 }
