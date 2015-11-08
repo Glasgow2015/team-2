@@ -147,15 +147,18 @@ def report_submit(request, userid):
     # OK
     return HttpResponse(json.dumps({'success': 'true'}))
 
+@csrf_exempt
 def report_accept(request, reportid):
     """ Admin accepts a report """
     # mark report as accepted
     rep = Job.objects.get(id=reportid)
     rep.accepted = True
+    rep.save()
 
     # refresh page
     return HttpResponse(status=200)
 
+@csrf_exempt
 def report_reject(request, reportid):
     """ Admin rejects a report """
     # delete report alltogether
