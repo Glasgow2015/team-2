@@ -55,8 +55,9 @@
         android:layout_alignStart="@+id/et_email" />
 
     <Button
-        android:layout_width="150dp"
-        android:layout_height="60dp"
+        style="@style/AppTheme.AccentButton"
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
         android:text="Submit"
         android:id="@+id/b_submit"
         android:layout_marginTop="40dp"
