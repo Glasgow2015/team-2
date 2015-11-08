@@ -26,17 +26,17 @@
     <![endif]-->
 
 </head>
-<body>
+<body id="body">
 
 {% load staticfiles %}
 {% csrf_token %}
 
-<div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+<div class="navbar navbar-inverse navbar-fixed-top" role="navigation" id="header">
     <div class="container-fluid">
 
         <div class="navbar-header">
             <ul class="nav navbar-nav navbar-left">
-                <li><img width="100" height="50" src="{% static 'UrbanRoots_Logo.png' %}" alt="Urban Roots logo"/></li>
+                <li class="col-lg-offset-2"><img width="100" height="50" src="{% static 'UrbanRoots_Logo.png' %}" alt="Urban Roots logo"/></li>
                 <!-- <li><a class="navbar-brand" href="/" id="brand_name">Urban Roots</a></li> -->
 
                 <li>
@@ -66,24 +66,24 @@
 
 <div class="container">
 <div class="row">
-<div class="col-md-2">
+<!-- <div class="col-md-2">
             <div class="sidebar-nav-fixed affix hidden-xs hidden-sm" id="left-block">
 {% block left_block %}
 
 {% endblock %}
-</div>
+</div> -->
     </div>
-<div id="centre_block" class="col-md-9">
+<div id="centre_block" class="col-lg-8 col-md-8 col-lg-offset-2">
 
     {% block body_block %}{% endblock %}
 
 </div>
 
-{% block right_block %}
+<!-- {% block right_block %}
 
 {% endblock %}
     </div>
-</div>
+</div> -->
 <!-- Bootstrap core JavaScript
                             = -->
 <!-- Placed at the end of the document so the pages load faster -->

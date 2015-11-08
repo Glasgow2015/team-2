@@ -71,7 +71,7 @@ for volunteer in volunteers:
                                    password="123")
 
     v = UserVolunteer.objects.get_or_create(user=u[0],
-                                            phone_number="123456789")
+                                            phone_number="123456789", skills="gardening, painting")
     skill0 = Skill.objects.get(name=skills[0])
     skill1 = Skill.objects.get(name=skills[1])
     skill_list0 = SkillsList.objects.get_or_create(volunteer=v[0],
