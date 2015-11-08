@@ -64,10 +64,11 @@ def volunteer_accept(request, userid):
     return HttpResponse(status=200)
 
 
+@csrf_exempt
 def volunteer_reject(request, userid):
     """ Admin rejects a volunteer application """
     u = User.objects.get(id=userid)
-    v = UserVolunteer.get(user=u)
+    v = UserVolunteer.objects.get(user=u)
     v.delete()
     u.delete()
 
@@ -84,7 +85,8 @@ def volunteer_jobs(request, userid):
     except User.DoesNotExist:
         return HttpResponse(404)
 
-    return render(request, '', context_dict)
+    #return render(request, '', context_dict)
+    return 
 
 @csrf_exempt
 def volunteer_assign(request, userid, jobid):
