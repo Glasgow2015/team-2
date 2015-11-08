@@ -1,6 +1,6 @@
 import json
 from django.shortcuts import render
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse, HttpResponseRedirect
 from django.core.exceptions import ObjectDoesNotExist
@@ -189,6 +189,7 @@ def report(request, reportid):
     context_dict['volunteers'] = UserVolunteer.objects.all()
     context_dict['arealist'] = AreasList.objects.all()
     context_dict['job'] = Job.objects.get(id=reportid)
+    context_dict['joblist'] = JobsList.objects.all()
 
     return render(request, 'report.html', context_dict)
 
@@ -210,7 +211,12 @@ def job(request, jobid):
     
     return JsonResponse(context_dict)
 
+@login_required
+def user_logout(request):
+    logout(request)
+    return HttpResponseRedirect('/')
 
+    
 def user_login(request):
 
     if request.method == 'POST':
@@ -223,7 +229,7 @@ def user_login(request):
             if user.is_active:
                 # valid active account
                 login(request, user)
-                return HttpResponseRedirect('/')
+                return HttpResponseRedirect('/reports')
 
             else:
                 # inactive account
@@ -270,7 +276,13 @@ def assign_volunteer(request):
         volunteer_id = request.GET['volunteer_id']
         job_id = request.GET['job_id']
 
+        print volunteer_id
+
+        
+
         this_volunteer = UserVolunteer.objects.get(id=volunteer_id)
+
+        print this_volunteer
         this_job = Job.objects.get(id=job_id)
 
         if not JobsList.objects.filter(volunteer=this_volunteer, job=this_job).exists():

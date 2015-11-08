@@ -12,7 +12,7 @@
 
 
 <div id="reports bg-success">
- <h2>Volunteers</h2>
+ <h2>Volunteering applications</h2>
 {%  for volunteer in volunteers %}
 
 <div class="col-md-12 report" >
@@ -48,12 +48,14 @@
     function accept(id){
     	$.get('/volunteer/'+id+'/accept', function(data){
          // $('#questions').html(data);
+         location.reload();
         });
     }
 
     function reject(id){
       $.get('/volunteer/'+id+'/reject', function(data){
          // $('#questions').html(data);
+         location.reload();
         });
     }
 </script>

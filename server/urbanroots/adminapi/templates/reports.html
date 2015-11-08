@@ -38,6 +38,7 @@
  function accept(id){
     	$.get('/report/'+id+'/accept/', function(data){
          // $('#questions').html(data);
+         location.reload();
         });
     }
     // });
