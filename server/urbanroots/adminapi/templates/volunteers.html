@@ -13,10 +13,11 @@
 
 <div id="reports bg-success">
  <h2 class="col-lg-offset-3">Volunteering applications</h2>
+ <!-- display details of volunteers -->
 {%  for volunteer in volunteers %}
 
 <div class="col-md-12 report col-lg-offset-3" >
-  <!-- <a href="{{ BASE_DIR }}/reports/{{ report.id }}" > -->
+
     <div class="col-md-3 col-md-offset-0 col-lg-3 col-lg-offset-0">
     <h4>{{ volunteer.user.first_name }} {{ volunteer.user.last_name }}</h4>
     <p>Phone: {{ volunteer.phone_number }}</p>
@@ -32,11 +33,7 @@
     <p>Skills: {{ volunteer.skills }}</p>
     {% endif %}
     </div>
-
-   <!-- <div class="col-lg-6 col-lg-offset-2">
-       
-   </div> -->
-   <!-- </a> -->
+   <!-- if volunteer has been accepted hide buttons-->
    <div class="col-lg-offset-9 col-lg-4">
        {% if not volunteer.accepted  %}
        
@@ -48,6 +45,8 @@
 
 {% endfor %}
 </div>
+
+<!-- functions for accepting or rejecting volunteers when button is clicked-->
 <script>
     function accept(id){
     	$.get('/volunteer/'+id+'/accept', function(data){

@@ -22,14 +22,6 @@ class UserVolunteer(models.Model):
     assigned = models.BooleanField(default=False)
 
 
-    # def save(self, *args, **kwargs):
-    #     super(UserProfile, self).save(*args, **kwargs)
-    # relationships
-    # don't uncomment!
-    # skills_list = models.ForeignKey(SkillsList, blank=True, null=True)
-    # areas_list = models.ForeignKey(AreasList)
-
-
 # Urban Roots Admin
 class UserOwner(models.Model):
 
