@@ -86,6 +86,7 @@ def volunteer_jobs(request, userid):
 
     return render(request, '', context_dict)
 
+@csrf_exempt
 def volunteer_assign(request, userid, jobid):
     """ Assign a job to a volunteer """
     try:
@@ -95,9 +96,9 @@ def volunteer_assign(request, userid, jobid):
         JobsList.objects.get_or_create(volunteer=vol,
                                        job=job_v)
     except User.DoesNotExist:
-        return HttpResponse(404)
+        return HttpResponse(status=404)
 
-    return volunteer(request, userid)
+    return HttpResponse(status=200)
 
 def volunteer(request, userid):
     """ View a volunteer's profile """
